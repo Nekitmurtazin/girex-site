@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Товар — GIREX</title>
+<meta name="description" content="Карточка изделия GIREX: характеристики, материалы, присоединительные размеры, стандарты.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
 <style>
 body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 1440px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
@@ -14,21 +15,27 @@ a:hover { color: var(--accent-dark); }
 .btn-primary:hover { background: var(--accent-dark); color: #FFFFFF; }
 .nav-link { color: #16181D; font-size: 15px; font-weight: 500; }
 .nav-link:hover { color: var(--accent); }
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 .site-header { position: sticky; top: 0; z-index: 100; }
-.btn-doc { display: inline-flex; align-items: center; justify-content: center; gap: 6px; height: 40px; border: 1px solid #D8D6D2; border-radius: 10px; background: #FFFFFF; color: #16181D; font-family: inherit; font-size: 13px; font-weight: 600; cursor: pointer; }
+.btn-doc { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 56px; padding: 0 24px; border: 1px solid #D8D6D2; border-radius: 10px; background: #FFFFFF; color: #16181D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
 .btn-doc:hover { border-color: var(--accent); color: var(--accent); }
 .card-title { color: #16181D; }
 .card-title:hover { color: var(--accent); }
 .toast { position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px); background: #16181D; color: #FFFFFF; padding: 14px 22px; border-radius: 12px; font-size: 14px; font-weight: 500; box-shadow: 0 14px 36px rgba(22, 24, 29, 0.25); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 200; }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
-
-.btn-doc { height: 56px; font-size: 15px; padding: 0 24px; gap: 8px; }
+html { background: #F5F5F4; }
+body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 .spec-row { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-bottom: 1px solid #F0EEEA; font-size: 15px; }
 .spec-row span:first-child { color: #8A8F98; flex-shrink: 0; }
 .spec-row span:last-child { font-weight: 600; text-align: right; }
-html { background: #F5F5F4; }
-body { max-width: 1920px; margin-left: auto; margin-right: auto; }
+.h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; }
+.block { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 20px; padding: 32px 36px; display: flex; flex-direction: column; gap: 18px; }
+table.data { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+table.data th, table.data td { border: 1px solid #EAE8E4; padding: 8px 12px; text-align: left; }
+table.data th { background: #FAFAF9; font-weight: 700; }
+table.data td:first-child { color: #5C6470; }
+.scroll { overflow-x: auto; }
+ul.feat { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.55; color: #5C6470; }
 </style>
 </head>
 <body>
@@ -40,7 +47,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 </a>
 <div style="display: flex; align-items: center; gap: 32px">
 <a class="nav-link" href="about.html">О компании</a>
-<a class="nav-link" href="catalog.html">Каталог</a>
+<a class="nav-link" href="catalog.html" style="color: var(--accent)">Каталог</a>
 <a class="nav-link" href="about.html#proizvodstvo">Производство</a>
 <a class="nav-link" href="services.html">Услуги</a>
 <a class="nav-link" href="projects.html">Проекты</a>
@@ -58,8 +65,8 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <div id="p-card" style="display: grid; grid-template-columns: 560px minmax(0, 1fr); gap: 48px; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 24px; padding: 40px">
 <div style="height: 480px; display: flex; align-items: center; justify-content: center; background: #FAFAF9; border-radius: 16px; padding: 32px"><img id="p-img" src="" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
 <div style="display: flex; flex-direction: column; gap: 20px">
-<div style="display: flex"><span id="p-art" style="background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 4px 12px; font-size: 13px; font-weight: 700"></span></div>
-<h1 id="p-name" style="font-size: 34px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin: 0"></h1>
+<div style="display: flex; gap: 8px; flex-wrap: wrap" id="p-models"></div>
+<h1 id="p-name" style="font-size: 32px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin: 0"></h1>
 <div style="display: flex; flex-direction: column">
 <div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #8A8F98; padding-bottom: 6px">ХАРАКТЕРИСТИКИ</div>
 <div id="p-specs"></div>
@@ -72,6 +79,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 </div>
 </div>
 
+<div id="p-blocks" style="display: flex; flex-direction: column; gap: 20px"></div>
 <div id="p-missing" style="display: none; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 24px; padding: 56px; font-size: 18px">Товар не найден. <a href="catalog.html">Вернуться в каталог</a></div>
 </div>
 
@@ -93,559 +101,104 @@ document.addEventListener('click', function (e) {
   clearTimeout(t._h);
   t._h = setTimeout(function () { t.classList.remove('show'); }, 2500);
 });
-</script>
-<script>
-var PRODUCTS = [
- {
-  "id": "1101",
-  "name": "Задвижка с обрезиненным клином фланцевая",
-  "img": "p1101.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN600"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +120 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "1191",
-  "name": "Задвижка с обрезиненным клином фланцевая под электропривод",
-  "img": "p1191.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +120 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "1212",
-  "name": "Задвижка чугунная клиновая металл/металл фланцевая",
-  "img": "p1212.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +130 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненна…"
-   ]
-  ]
- },
- {
-  "id": "1292",
-  "name": "Задвижка чугунная клиновая металл/металл под электропривод",
-  "img": "p1292.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +130 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненна…"
-   ]
-  ]
- },
- {
-  "id": "1301",
-  "name": "Задвижка шиберная с невыдвижным шпинделем",
-  "img": "p1301.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненна…"
-   ]
-  ]
- },
- {
-  "id": "1391",
-  "name": "Задвижка шиберная с невыдвижным шпинделем под электропривод",
-  "img": "p1391.webp",
-  "group": "Задвижки",
-  "groupId": "g-zadvizhki",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненна…"
-   ]
-  ]
- },
- {
-  "id": "2001",
-  "name": "Затвор фланцевый чугунный с двойным эксцентриситетом и редуктором",
-  "img": "p2001.webp",
-  "group": "Затворы дисковые",
-  "groupId": "g-zatvory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN200 – DN500"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "2091",
-  "name": "Затвор фланцевый с двойным эксцентриситетом под электропривод",
-  "img": "p2091.webp",
-  "group": "Затворы дисковые",
-  "groupId": "g-zatvory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN200 – DN500"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "2002",
-  "name": "Затвор поворотно-дисковый межфланцевый",
-  "img": "p2002.webp",
-  "group": "Затворы дисковые",
-  "groupId": "g-zatvory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN300"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода, морская, пресная и…"
-   ]
-  ]
- },
- {
-  "id": "2092",
-  "name": "Затвор поворотно-дисковый межфланцевый под электропривод",
-  "img": "p2092.webp",
-  "group": "Затворы дисковые",
-  "groupId": "g-zatvory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN350"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода, морская, пресная и…"
-   ]
-  ]
- },
- {
-  "id": "4101",
-  "name": "Клапан обратный шаровый фланцевый",
-  "img": "p4101.webp",
-  "group": "Обратные клапаны",
-  "groupId": "g-klapany",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN600"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "4102",
-  "name": "Клапан обратный фланцевый с мягким уплотнением и наклонным седлом",
-  "img": "p4102.webp",
-  "group": "Обратные клапаны",
-  "groupId": "g-klapany",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN400"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "4104",
-  "name": "Клапан обратный фланцевый с наклонным седлом и противовесом",
-  "img": "p4104.webp",
-  "group": "Обратные клапаны",
-  "groupId": "g-klapany",
-  "specs": [
-   [
-    "Диаметр",
-    "DN200 – DN1200"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- },
- {
-  "id": "4105",
-  "name": "Клапан обратный фланцевый с металлическим уплотнением с противовесом",
-  "img": "p4105.webp",
-  "group": "Обратные клапаны",
-  "groupId": "g-klapany",
-  "specs": [
-   [
-    "Диаметр",
-    "DN200 – DN1000"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +130 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненная"
-   ]
-  ]
- },
- {
-  "id": "4201",
-  "name": "Фильтр сетчатый фланцевый",
-  "img": "p4201.webp",
-  "group": "Фильтры и воздушные клапаны",
-  "groupId": "g-filtry",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN500"
-   ],
-   [
-    "Давление",
-    "PN 1,6 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая загрязненна…"
-   ]
-  ]
- },
- {
-  "id": "4301",
-  "name": "Вантуз / клапан воздушный 2-ступенчатый для очищенной воды",
-  "img": "p4301.webp",
-  "group": "Фильтры и воздушные клапаны",
-  "groupId": "g-filtry",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN200"
-   ],
-   [
-    "Давление",
-    "PN 1,6 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода, морская, пресная и…"
-   ]
-  ]
- },
- {
-  "id": "4302",
-  "name": "Вантуз / клапан воздушный 2-ступенчатый канализационный",
-  "img": "p4302.webp",
-  "group": "Фильтры и воздушные клапаны",
-  "groupId": "g-filtry",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN200"
-   ],
-   [
-    "Давление",
-    "PN 1,6 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "напорные сети передачи сточных вод для автоматического вп…"
-   ]
-  ]
- },
- {
-  "id": "5101",
-  "name": "Фланец обжимной для труб из ПЭ и ПВХ",
-  "img": "p5101.webp",
-  "group": "Фланцы и муфты",
-  "groupId": "g-flancy",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN600"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода, морская, пресная и…"
-   ]
-  ]
- },
- {
-  "id": "5201",
-  "name": "Муфта обжимная для труб из ПЭ и ПВХ",
-  "img": "p5201.webp",
-  "group": "Фланцы и муфты",
-  "groupId": "g-flancy",
-  "specs": [
-   [
-    "Диаметр",
-    "DN63 – DN400"
-   ],
-   [
-    "Давление",
-    "PN 1,6 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода, морская, пресная и…"
-   ]
-  ]
- },
- {
-  "id": "5701",
-  "name": "Виброкомпенсатор фланцевый",
-  "img": "p5701.webp",
-  "group": "Компенсаторы и вставки",
-  "groupId": "g-kompensatory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN32 – DN800"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "канализационные и ливневые стоки, техническая вода"
-   ]
-  ]
- },
- {
-  "id": "5705",
-  "name": "Вставка монтажная компенсационная",
-  "img": "p5705.webp",
-  "group": "Компенсаторы и вставки",
-  "groupId": "g-kompensatory",
-  "specs": [
-   [
-    "Диаметр",
-    "DN50 – DN1600"
-   ],
-   [
-    "Давление",
-    "PN 1,0 МПа"
-   ],
-   [
-    "Температура",
-    "до +70 °C"
-   ],
-   [
-    "Среда",
-    "питьевая и техническая очищенная вода"
-   ]
-  ]
- }
-];
-(function () {
-  var id = new URLSearchParams(location.search).get('id');
-  var p = PRODUCTS.find(function (x) { return x.id === id; });
-  if (!p) {
-    document.getElementById('p-card').style.display = 'none';
-    document.getElementById('p-missing').style.display = 'block';
-    return;
+
+var GROUP_ANCHOR = { shar: 'g-shar', zadv: 'g-zadv', rezb: 'g-rezb', kov: 'g-kov', filtr: 'g-filtr', flanec: 'g-flanec', fiting: 'g-fiting' };
+
+function el(tag, props, text) {
+  var n = document.createElement(tag);
+  Object.assign(n, props || {});
+  if (text != null) n.textContent = text;
+  return n;
+}
+
+function block(title, node) {
+  var b = el('div', { className: 'block' });
+  b.appendChild(el('div', { className: 'h2' }, title));
+  b.appendChild(node);
+  return b;
+}
+
+function table(head, rows) {
+  var wrap = el('div', { className: 'scroll' });
+  var t = el('table', { className: 'data' });
+  if (head) {
+    var tr = el('tr');
+    head.forEach(function (h) { tr.appendChild(el('th', null, h || '')); });
+    t.appendChild(tr);
   }
+  rows.forEach(function (r) {
+    var tr = el('tr');
+    r.forEach(function (c) { tr.appendChild(el('td', null, c == null ? '' : c)); });
+    t.appendChild(tr);
+  });
+  wrap.appendChild(t);
+  return wrap;
+}
+
+function render(p) {
   document.title = p.name + ' — GIREX';
-  document.getElementById('p-group').textContent = p.group;
-  document.getElementById('p-group').href = 'catalog.html#' + p.groupId;
-  document.getElementById('p-crumb').textContent = 'Арт. ' + p.id;
-  document.getElementById('p-art').textContent = 'Арт. ' + p.id;
+  var ga = document.getElementById('p-group');
+  ga.textContent = p.groupName;
+  ga.href = 'catalog.html#' + (GROUP_ANCHOR[p.group] || '');
+  document.getElementById('p-crumb').textContent = p.models[0] || p.name.slice(0, 40);
   document.getElementById('p-name').textContent = p.name;
   var img = document.getElementById('p-img');
-  img.src = p.img; img.alt = p.name;
-  var specs = document.getElementById('p-specs');
-  p.specs.forEach(function (s) {
-    var row = document.createElement('div');
-    row.className = 'spec-row';
-    var k = document.createElement('span'); k.textContent = s[0];
-    var v = document.createElement('span'); v.textContent = s[1];
-    row.append(k, v);
-    specs.appendChild(row);
+  if (p.img) { img.src = p.img; img.alt = p.name; } else { img.remove(); }
+
+  var mb = document.getElementById('p-models');
+  (p.models.length ? p.models : [p.groupName]).forEach(function (m) {
+    var s = el('span', null, m);
+    s.style.cssText = 'background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 4px 12px; font-size: 13px; font-weight: 700';
+    mb.appendChild(s);
   });
-  document.getElementById('p-certs').setAttribute('data-stub', 'Сертификаты для арт. ' + p.id + ' скоро появятся');
-  document.getElementById('p-draws').setAttribute('data-stub', 'Чертежи для арт. ' + p.id + ' скоро появятся');
-})();
+
+  var sp = document.getElementById('p-specs');
+  p.specs.forEach(function (s) {
+    var row = el('div', { className: 'spec-row' });
+    row.appendChild(el('span', null, s[0]));
+    row.appendChild(el('span', null, s[1]));
+    sp.appendChild(row);
+  });
+
+  var blocks = document.getElementById('p-blocks');
+  if (p.features && p.features.length) {
+    var ul = el('ul', { className: 'feat' });
+    p.features.forEach(function (f) { ul.appendChild(el('li', null, f)); });
+    blocks.appendChild(block('Описание и технические требования', ul));
+  }
+  if (p.materials && p.materials.length) {
+    blocks.appendChild(block('Комплектующие и материалы', table(['Деталь', 'Материал'], p.materials)));
+  }
+  if (p.dims && p.dims.rows && p.dims.rows.length) {
+    blocks.appendChild(block('Присоединительные и габаритные размеры, мм', table(p.dims.head, p.dims.rows)));
+  }
+  if (p.standards && p.standards.length) {
+    var d = el('div', null, p.standards.join(' · '));
+    d.style.cssText = 'font-size: 14.5px; line-height: 1.6; color: #5C6470';
+    blocks.appendChild(block('Стандарты', d));
+  }
+
+  var code = p.models[0] || p.name;
+  document.getElementById('p-certs').setAttribute('data-stub', 'Сертификаты для ' + code + ' скоро появятся');
+  document.getElementById('p-draws').setAttribute('data-stub', 'Чертежи для ' + code + ' скоро появятся');
+}
+
+fetch('products.json')
+  .then(function (r) { return r.json(); })
+  .then(function (list) {
+    var id = new URLSearchParams(location.search).get('id');
+    var p = list.filter(function (x) { return x.id === id; })[0];
+    if (!p) {
+      document.getElementById('p-card').style.display = 'none';
+      document.getElementById('p-missing').style.display = 'block';
+      return;
+    }
+    render(p);
+  })
+  .catch(function () {
+    document.getElementById('p-card').style.display = 'none';
+    document.getElementById('p-missing').style.display = 'block';
+  });
 </script>
 </body>
 </html>
