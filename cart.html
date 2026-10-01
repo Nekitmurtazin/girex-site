@@ -86,7 +86,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <input class="fld" name="company" placeholder="Компания">
 <textarea class="fld" name="comment" rows="3" placeholder="Комментарий: объект, сроки, особые требования"></textarea>
 <button type="submit" class="btn-primary" style="width: 100%">Отправить заявку</button>
-<div style="font-size: 12px; line-height: 1.5; color: #8A8F98">Заявка уходит письмом на info@girex.ru — откроется ваша почтовая программа с готовым текстом. Чертежи и спецификации приложите к письму.</div>
+<div style="font-size: 12px; line-height: 1.5; color: #8A8F98">Заявка уходит менеджеру на info@girex.ru. Чертежи и спецификации пришлите ответным письмом или на почту.</div>
 </form>
 </div>
 
@@ -200,17 +200,38 @@ document.addEventListener('cart:change', render);
 document.getElementById('order').addEventListener('submit', function (e) {
   e.preventDefault();
   var f = new FormData(e.target);
-  var lines = ['Заявка на расчёт с сайта GIREX', '', 'Позиции:'];
-  Cart.items().forEach(function (it, i) {
+  var items = Cart.items();
+  var list = items.map(function (it, i) {
     var extra = [it.model, it.size].filter(Boolean).join(', ');
-    lines.push((i + 1) + '. ' + it.name + (extra ? ' (' + extra + ')' : '') + ' — ' + it.qty + ' шт.');
+    return (i + 1) + '. ' + it.name + (extra ? ' (' + extra + ')' : '') + ' — ' + it.qty + ' шт.';
+  }).join('\n');
+  var btn = e.target.querySelector('button[type=submit]');
+  btn.disabled = true;
+  var label = btn.textContent;
+  btn.textContent = 'Отправляем…';
+
+  var body = ['Позиции:', list, '', 'Имя: ' + (f.get('name') || ''), 'Телефон: ' + (f.get('phone') || ''),
+              'Почта: ' + (f.get('email') || '—'), 'Компания: ' + (f.get('company') || '—'),
+              'Комментарий: ' + (f.get('comment') || '—')].join('\n');
+
+  sendRequest({
+    'Имя': f.get('name') || '',
+    'Телефон': f.get('phone') || '',
+    'Почта': f.get('email') || '',
+    'Компания': f.get('company') || '',
+    'Комментарий': f.get('comment') || '',
+    'Позиции': list || '—',
+    'Всего позиций': String(items.length)
+  }, body).then(function () {
+    Cart.clear();
+    e.target.reset();
+    cartToast('Заявка отправлена — менеджер свяжется с вами в течение рабочего дня');
+  }).catch(function () {
+    cartToast('Не удалось отправить автоматически — письмо открыто в почтовой программе');
+  }).then(function () {
+    btn.disabled = false;
+    btn.textContent = label;
   });
-  lines.push('', 'Контакты:', 'Имя: ' + (f.get('name') || ''), 'Телефон: ' + (f.get('phone') || ''),
-             'Почта: ' + (f.get('email') || '—'), 'Компания: ' + (f.get('company') || '—'),
-             '', 'Комментарий:', f.get('comment') || '—');
-  location.href = 'mailto:info@girex.ru?subject=' + encodeURIComponent('Заявка с сайта GIREX')
-    + '&body=' + encodeURIComponent(lines.join('\n'));
-  cartToast('Письмо сформировано — отправьте его из почтовой программы');
 });
 </script>
 </body>

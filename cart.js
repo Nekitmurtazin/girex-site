@@ -90,6 +90,28 @@
     toast('Добавлено в корзину: ' + (b.getAttribute('data-model') || b.getAttribute('data-name')).slice(0, 48));
   });
 
+
+/* ——— отправка заявки на почту через FormSubmit (без своего сервера) ——— */
+window.GIREX_EMAIL = 'info@girex.ru';
+
+window.sendRequest = function (fields, mailtoBody) {
+  var url = 'https://formsubmit.co/ajax/' + window.GIREX_EMAIL;
+  var payload = Object.assign({ _subject: 'Заявка с сайта GIREX', _template: 'table', _captcha: 'false' }, fields);
+  return fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify(payload)
+  }).then(function (r) { return r.json(); }).then(function (res) {
+    if (String(res.success) !== 'true') throw new Error(res.message || 'send failed');
+    return res;
+  }).catch(function (err) {
+    // не дошло — открываем почтовую программу с готовым письмом
+    location.href = 'mailto:' + window.GIREX_EMAIL + '?subject=' + encodeURIComponent('Заявка с сайта GIREX')
+      + '&body=' + encodeURIComponent(mailtoBody);
+    throw err;
+  });
+};
+
   document.addEventListener('DOMContentLoaded', paintBadge);
   paintBadge();
 })();

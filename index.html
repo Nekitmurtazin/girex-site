@@ -608,23 +608,32 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 
 </div>
 
+<script src="cart.js"></script>
 <script>
 document.getElementById('zayavka-form').addEventListener('submit', function (e) {
   e.preventDefault();
   var f = new FormData(e.target);
-  var lines = [
-    'Имя: ' + (f.get('name') || ''),
-    'Телефон: ' + (f.get('phone') || ''),
-    'Компания: ' + (f.get('company') || '—'),
-    '',
-    'Задача:',
-    f.get('task') || '—'
-  ];
-  location.href = 'mailto:info@girex.ru?subject=' + encodeURIComponent('Заявка с сайта GIREX')
-    + '&body=' + encodeURIComponent(lines.join('
-'));
+  var btn = e.target.querySelector('button[type=submit]');
+  var label = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Отправляем…';
+  var body = ['Имя: ' + (f.get('name') || ''), 'Телефон: ' + (f.get('phone') || ''),
+              'Компания: ' + (f.get('company') || '—'), '', 'Задача:', f.get('task') || '—'].join('\n');
+  sendRequest({
+    'Имя': f.get('name') || '',
+    'Телефон': f.get('phone') || '',
+    'Компания': f.get('company') || '',
+    'Задача': f.get('task') || ''
+  }, body).then(function () {
+    e.target.reset();
+    cartToast('Заявка отправлена — менеджер свяжется с вами в течение рабочего дня');
+  }).catch(function () {
+    cartToast('Не удалось отправить автоматически — письмо открыто в почтовой программе');
+  }).then(function () {
+    btn.disabled = false;
+    btn.textContent = label;
+  });
 });
 </script>
-<script src="cart.js"></script>
 </body>
 </html>
