@@ -27,6 +27,9 @@ html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 .bullet::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
 html { background: #F5F5F4; }
 body { max-width: 1920px; margin-left: auto; margin-right: auto; }
+.cart-link { position: relative; display: flex; align-items: center; color: #16181D; }
+.cart-link:hover { color: var(--accent); }
+.cart-badge { position: absolute; top: -7px; left: 13px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #FFFFFF; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; display: none; }
 </style>
 <link rel="icon" href="favicon.png" type="image/png">
 </head>
@@ -43,6 +46,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <a class="nav-link" href="contacts.html">Контакты</a>
 </div>
 <div style="display: flex; align-items: center; gap: 24px">
+<a class="cart-link" href="cart.html" title="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="cart-badge" data-cart-count>0</span></a>
 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><a href="tel:+79101360087" style="font-size: 18px; font-weight: 700; color: #16181D">+7 910 136-00-87</a><div style="font-size: 12px; color: #8A8F98">Пн – Пт, 9:00 – 18:00</div></div>
 <a href="index.html#zayavka" class="btn-primary" style="height: 48px; padding: 0 22px; font-size: 15px">Связаться с менеджером</a>
 </div>
@@ -83,5 +87,6 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <div style="display: flex; gap: 24px"><a href="#" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="#" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
 </div>
 
+<script src="cart.js"></script>
 </body>
 </html>

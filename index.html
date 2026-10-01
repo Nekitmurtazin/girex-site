@@ -24,7 +24,10 @@
     .nav-link { color: #16181D; font-size: 15px; font-weight: 500; }
     .nav-link:hover { color: var(--accent); }
     .site-header { position: sticky; top: 0; z-index: 100; }
-  </style>
+  .cart-link { position: relative; display: flex; align-items: center; color: #16181D; }
+.cart-link:hover { color: var(--accent); }
+.cart-badge { position: absolute; top: -7px; left: 13px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #FFFFFF; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; display: none; }
+</style>
 
 <style>body { min-width: 1440px; } html { scroll-behavior: smooth; scroll-padding-top: 100px; }
 html { background: #F5F5F4; }
@@ -50,7 +53,8 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
       <a class="nav-link" href="contacts.html">Контакты</a>
     </div>
     <div style="display: flex; align-items: center; gap: 24px">
-      <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px">
+<a class="cart-link" href="cart.html" title="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="cart-badge" data-cart-count>0</span></a>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px">
         <a href="tel:+79101360087" style="font-size: 18px; font-weight: 700; color: #16181D">+7 910 136-00-87</a>
         <div style="font-size: 12px; color: #8A8F98">Пн – Пт, 9:00 – 18:00</div>
       </div>
@@ -191,7 +195,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
     </div>
     <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
       <a class="cat-card" href="catalog.html#g-shar" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-shar.webp" alt="Шаровые клапаны" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-yzqh4101.webp" alt="Шаровые клапаны" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Шаровые клапаны</div>
@@ -203,7 +207,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-zadv" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-zadv.webp" alt="Задвижки, запорные и обратные клапаны фланцевые" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-yzzg4101.webp" alt="Задвижки, запорные и обратные клапаны фланцевые" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Задвижки, запорные и обратные клапаны фланцевые</div>
@@ -215,7 +219,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-rezb" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-rezb.webp" alt="Задвижки, запорные и обратные клапаны резьбовые" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-yzzg1001.webp" alt="Задвижки, запорные и обратные клапаны резьбовые" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Задвижки, запорные и обратные клапаны резьбовые</div>
@@ -227,7 +231,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-kov" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-kov.webp" alt="Кованая арматура" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-yzzfs106.webp" alt="Кованая арматура" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Кованая арматура</div>
@@ -239,7 +243,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-filtr" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-filtr.webp" alt="Фильтры" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-yzlg4102.webp" alt="Фильтры" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Фильтры</div>
@@ -251,7 +255,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-flanec" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-flanec.webp" alt="Фланцы" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-flanec-102.webp" alt="Фланцы" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Фланцы</div>
@@ -263,7 +267,7 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
         </div>
       </a>
       <a class="cat-card" href="catalog.html#g-fiting" style="display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D">
-        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="cover-fiting.webp" alt="Трубная арматура и фитинги" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
+        <div style="height: 240px; display: flex; align-items: center; justify-content: center; padding: 18px"><img src="v-fiting-118.webp" alt="Трубная арматура и фитинги" loading="lazy" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 20px 24px">
           <div style="display: flex; flex-direction: column; gap: 4px">
             <div style="font-size: 17px; font-weight: 700">Трубная арматура и фитинги</div>
@@ -621,5 +625,6 @@ document.getElementById('zayavka-form').addEventListener('submit', function (e) 
 '));
 });
 </script>
+<script src="cart.js"></script>
 </body>
 </html>
