@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /cart.html
+
+Sitemap: https://nekitmurtazin.github.io/girex-site/sitemap.xml

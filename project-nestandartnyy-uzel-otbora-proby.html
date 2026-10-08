@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Узел отбора проб для линии сточных вод — проект GIREX</title>
+<meta name="description" content="Спроектировали и собрали узел с шаровыми кранами и фильтром под стеснённые условия монтажа.">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
+<style>
+body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 320px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
+* { box-sizing: border-box; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-dark); }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #FFFFFF; border-radius: 10px; padding: 0 28px; height: 56px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.btn-primary:hover { background: var(--accent-dark); color: #FFFFFF; }
+.btn-ghost { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: transparent; color: #16181D; border: 1px solid #D8D6D2; border-radius: 10px; padding: 0 28px; height: 56px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.btn-ghost:hover { border-color: #16181D; color: #16181D; }
+.nav-link { color: #16181D; font-size: 15px; font-weight: 500; }
+.nav-link:hover { color: var(--accent); }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+.site-header { position: sticky; top: 0; z-index: 100; }
+.section { display: flex; flex-direction: column; gap: 32px; padding: 88px 56px 0; }
+.h2 { font-size: 34px; font-weight: 800; letter-spacing: -0.01em; }
+.card { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; padding: 28px; display: flex; flex-direction: column; gap: 12px; }
+.chip { display: flex; align-items: center; gap: 8px; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 999px; padding: 10px 18px; font-size: 13.5px; font-weight: 600; }
+.bullet { display: flex; align-items: center; gap: 12px; font-size: 15px; }
+.bullet::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+html { background: #F5F5F4; }
+body { max-width: 1920px; margin-left: auto; margin-right: auto; }
+.cart-link { position: relative; display: flex; align-items: center; color: #16181D; }
+.cart-link:hover { color: var(--accent); }
+.cart-badge { position: absolute; top: -7px; left: 13px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #FFFFFF; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; display: none; }
+
+/* ---------- адаптив ---------- */
+.burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid #E4E2DF; border-radius: 10px; background: #FFFFFF; cursor: pointer; flex-shrink: 0; }
+.mobile-menu { display: none; flex-direction: column; gap: 2px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4; padding: 8px 20px 16px; position: sticky; top: 84px; z-index: 99; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: 12px 4px; font-size: 16px; font-weight: 500; color: #16181D; border-bottom: 1px solid #F3F1EE; }
+.mobile-menu .mm-cta { margin-top: 10px; border: 0; }
+.mobile-bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, 0.97); border-top: 1px solid #EAE8E4; }
+.mobile-bar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 10px; font-size: 15px; font-weight: 600; }
+.mobile-bar .mb-call { border: 1px solid #D8D6D2; color: #16181D; background: #FFFFFF; }
+.mobile-bar .mb-spec { background: var(--accent); color: #FFFFFF; }
+
+@media (max-width: 1340px) {
+  [style*="padding: 88px 56px"] { padding: 64px 32px !important; }
+  [style*="padding: 56px 56px"] { padding: 40px 32px !important; }
+  [style*="padding: 48px 56px"] { padding: 32px 32px !important; }
+  [style*="padding: 40px 56px"] { padding: 28px 32px !important; }
+  [style*="padding: 32px 56px"] { padding: 24px 32px !important; }
+  [style*="padding: 28px 56px"] { padding: 20px 32px !important; }
+  [style*="padding: 0 56px"] { padding: 0 32px !important; }
+  [style*="height: 84px; padding: 0 56px"] { padding: 0 20px !important; }
+  [style*="padding: 60px 56px 76px"] { padding: 40px 32px 56px !important; }
+}
+
+@media (max-width: 1100px) {
+  [style*="repeat(4, minmax"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="repeat(3, minmax"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="width: 620px"] { width: auto !important; }
+  [style*="width: 560px minmax"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 560px"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: minmax(0, 1fr) 460px"] { grid-template-columns: 1fr !important; }
+  [style*="width: 480px"] { width: auto !important; }
+  [style*="font-size: 58px"] { font-size: 40px !important; }
+  [style*="font-size: 54px"] { font-size: 38px !important; }
+  [style*="font-size: 42px"] { font-size: 32px !important; }
+  [style*="font-size: 34px"] { font-size: 27px !important; }
+  [style*="font-size: 32px; font-weight: 800; line-height: 1.2"] { font-size: 26px !important; }
+}
+
+@media (max-width: 860px) {
+  .main-nav { display: none !important; }
+  .burger { display: flex; }
+  .mobile-bar { display: flex; }
+  body { padding-bottom: 76px; }
+  [style*="repeat(2, minmax"], [style*="repeat(3, minmax"], [style*="repeat(4, minmax"] { grid-template-columns: 1fr !important; }
+  [style*="display: flex"][style*="gap: 56px"] { flex-direction: column !important; }
+  [style*="display: flex"][style*="gap: 48px"] { flex-direction: column !important; align-items: stretch !important; }
+  [style*="display: flex"][style*="gap: 64px"] { flex-direction: column !important; }
+  [style*="display: flex"][style*="gap: 36px"] { flex-direction: column !important; }
+  [style*="width: 540px"] { width: auto !important; }
+  [style*="width: 240px"] { width: auto !important; }
+  [style*="height: 580px"] { height: 0 !important; }
+  [style*="width: 920px"] { display: none !important; }
+  [style*="height: 480px"] { height: 300px !important; }
+  [style*="height: 460px"] { height: 240px !important; }
+  [style*="min-width: 1440px"] { min-width: 0 !important; }
+  .btn-primary, .btn-ghost { width: 100%; }
+  .mobile-menu { top: 72px; }
+}
+
+@media (max-width: 560px) {
+  [style*="padding: 88px 56px"], [style*="padding: 56px 56px"], [style*="padding: 48px 56px"],
+  [style*="padding: 40px 56px"], [style*="padding: 32px 56px"], [style*="padding: 28px 56px"],
+  [style*="padding: 0 56px"], [style*="padding: 60px 56px 76px"] { padding-left: 16px !important; padding-right: 16px !important; }
+  [style*="padding: 48px 56px"] { padding: 28px 18px !important; }
+  [style*="padding: 56px"] { padding: 24px 18px !important; }
+  [style*="padding: 40px"] { padding: 20px 16px !important; }
+  [style*="font-size: 58px"], [style*="font-size: 54px"] { font-size: 31px !important; }
+  [style*="font-size: 42px"] { font-size: 26px !important; }
+  [style*="font-size: 34px"] { font-size: 23px !important; }
+  [style*="font-size: 32px; font-weight: 800"] { font-size: 22px !important; }
+  [style*="font-size: 28px; font-weight: 800"] { font-size: 21px !important; }
+  [style*="height: 84px"] { height: 72px !important; }
+  [style*="height: 300px"] { height: 220px !important; }
+  table.data { font-size: 12.5px; }
+}
+
+@media (max-width: 860px) {
+  .site-header { gap: 12px !important; }
+  .site-header a.btn-primary { display: none !important; }
+  .site-header [style*="flex-direction: column; align-items: flex-end"] { display: none !important; }
+  [style*="display: flex"][style*="gap: 16px"] { flex-wrap: wrap !important; }
+  [style*="display: flex"][style*="gap: 12px"] { flex-wrap: wrap !important; }
+  [style*="display: flex; gap: 10px"] { flex-wrap: wrap !important; }
+  .cart-link { margin-left: auto; }
+}
+@media (max-width: 560px) {
+  .site-header img[src*="logo"] { height: 34px !important; }
+  [style*="letter-spacing: 0.14em"] { font-size: 11px !important; }
+}
+
+/* ——— раздел проектов ——— */
+.pr-wrap { padding: 44px 56px 0; display: flex; flex-direction: column; gap: 18px; }
+.pr-lede { font-size: 16px; line-height: 1.6; color: #5C6470; max-width: 760px; }
+.pr-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+.pr-stat { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; }
+.pr-stat b { font-size: 28px; font-weight: 800; color: var(--accent); }
+.pr-stat span { font-size: 13.5px; color: #5C6470; }
+.demo-note { background: #FFF8E6; border: 1px solid #F0E0B0; border-radius: 12px; padding: 14px 18px; font-size: 14px; line-height: 1.5; color: #6B5A24; }
+.pr-cats { display: flex; gap: 10px; flex-wrap: wrap; }
+.pr-cat { height: 40px; padding: 0 18px; border: 1px solid #EAE8E4; border-radius: 999px; background: #FFFFFF; font-family: inherit; font-size: 13.5px; font-weight: 600; color: #16181D; cursor: pointer; }
+.pr-cat:hover { border-color: var(--accent); color: var(--accent); }
+.pr-cat.on { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.pr-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; padding: 10px 56px 0; }
+.pr-card { display: flex; flex-direction: column; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; overflow: hidden; color: #16181D; }
+.pr-card:hover { border-color: var(--accent); color: #16181D; box-shadow: 0 12px 32px rgba(22, 24, 29, 0.08); }
+.pr-card-media { position: relative; height: 190px; background: #FAFAF9; }
+.pr-cover, .pr-card-media .ph { width: 100%; height: 100%; object-fit: cover; display: flex; align-items: center; justify-content: center; color: #C3C7CD; font-size: 13px; }
+.pr-badge { position: absolute; left: 12px; bottom: 12px; background: rgba(22, 24, 29, 0.82); color: #FFFFFF; font-size: 12px; font-weight: 600; padding: 5px 11px; border-radius: 999px; }
+.pr-card-body { display: flex; flex-direction: column; gap: 9px; padding: 18px 20px 20px; flex-grow: 1; }
+.pr-card-title { font-size: 16px; font-weight: 700; line-height: 1.32; margin: 0; }
+.pr-card-text { font-size: 13.5px; line-height: 1.5; color: #5C6470; margin: 0; }
+.pr-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.pr-tag { font-size: 11.5px; font-weight: 600; color: var(--accent); background: var(--accent-soft); border-radius: 6px; padding: 3px 8px; }
+.pr-more { margin-top: auto; padding-top: 8px; font-size: 14px; font-weight: 600; color: var(--accent); }
+.pr-empty { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 16px; padding: 40px; font-size: 15.5px; color: #5C6470; grid-column: 1 / -1; }
+
+/* детальная */
+.pr-detail { display: flex; flex-direction: column; gap: 24px; padding: 24px 56px 0; }
+.pr-hero { display: grid; grid-template-columns: minmax(0, 1fr) 46%; gap: 32px; align-items: center; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 22px; padding: 32px; }
+.pr-hero-left { display: flex; flex-direction: column; gap: 16px; }
+.pr-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: var(--accent); }
+.pr-h1 { font-size: 36px; font-weight: 800; line-height: 1.16; letter-spacing: -0.01em; margin: 0; }
+.pr-h1 .accent { color: var(--accent); }
+.pr-lead { font-size: 15.5px; line-height: 1.6; color: #5C6470; margin: 0; }
+.pr-cta { display: flex; gap: 12px; flex-wrap: wrap; }
+.pr-hero-img, .pr-hero-right .ph { width: 100%; height: 340px; object-fit: cover; border-radius: 16px; background: #FAFAF9; display: flex; align-items: center; justify-content: center; color: #C3C7CD; font-size: 13px; }
+.pr-specs { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.pr-spec { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; }
+.pr-spec span { font-size: 12.5px; color: #8A8F98; }
+.pr-spec b { font-size: 16px; font-weight: 700; }
+.pr-two { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; }
+.pr-block { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 18px; padding: 24px 26px; display: flex; flex-direction: column; gap: 10px; }
+.pr-block.green { background: #F2F9F4; border-color: #DCEBE1; }
+.pr-block b { font-size: 18px; font-weight: 800; }
+.pr-block p { font-size: 15px; line-height: 1.6; color: #5C6470; margin: 0; }
+.pr-section { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; margin: 8px 0 0; }
+.pr-eq { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 16px; }
+.pr-eq-card { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 8px; }
+.pr-eq-img, .pr-eq-card .ph { height: 120px; object-fit: contain; background: #FAFAF9; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: #C3C7CD; font-size: 12px; }
+.pr-eq-card b { font-size: 14.5px; }
+.pr-eq-card span { font-size: 13px; color: #5C6470; line-height: 1.45; }
+.pr-eq-link { font-size: 13px; font-weight: 600; }
+.pr-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 16px; }
+.pr-step { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; padding: 18px; display: flex; flex-direction: column; gap: 7px; }
+.pr-step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.pr-step b { font-size: 15px; }
+.pr-step-text { font-size: 13px; color: #5C6470; line-height: 1.45; }
+.pr-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+.pr-photo { margin: 0; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; overflow: hidden; }
+.pr-photo img { width: 100%; height: 220px; object-fit: cover; cursor: zoom-in; display: block; }
+.pr-photo figcaption { font-size: 13px; color: #5C6470; padding: 10px 14px; }
+.pr-lightbox { position: fixed; inset: 0; background: rgba(12, 14, 16, 0.86); display: flex; align-items: center; justify-content: center; padding: 32px; z-index: 300; cursor: zoom-out; }
+.pr-lightbox img { max-width: 100%; max-height: 100%; border-radius: 10px; }
+.pr-result { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 18px; padding: 24px 26px; display: flex; flex-direction: column; gap: 12px; }
+.pr-result-title { font-size: 18px; font-weight: 800; }
+.pr-result-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+.pr-result-list li { position: relative; padding-left: 30px; font-size: 15px; line-height: 1.5; color: #3A4046; }
+.pr-result-list li::before { content: ""; position: absolute; left: 0; top: 2px; width: 20px; height: 20px; border-radius: 50%; background: var(--accent-soft) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='m6 12.5 4 4 8-9' stroke='%231A8440' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/13px no-repeat; }
+.pr-docs { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.pr-doc { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 4px; color: #16181D; }
+.pr-doc:hover { border-color: var(--accent); color: #16181D; }
+.pr-doc span { font-size: 12.5px; color: #8A8F98; }
+.pr-final { background: #16181D; color: #FFFFFF; border-radius: 22px; padding: 32px 36px; display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.pr-final b { font-size: 24px; font-weight: 800; }
+.pr-final span { font-size: 15px; color: #B9BDC4; }
+.pr-final .btn-primary { margin-top: 8px; }
+.pr-final-link { color: #FFFFFF; font-size: 14px; text-decoration: underline; }
+
+@media (max-width: 1340px) { .pr-wrap, .pr-grid, .pr-detail { padding-left: 32px !important; padding-right: 32px !important; } }
+@media (max-width: 1100px) { .pr-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 860px) {
+  .pr-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .pr-hero { grid-template-columns: 1fr; padding: 22px; }
+  .pr-two { grid-template-columns: 1fr; }
+  .pr-h1 { font-size: 27px; }
+  .pr-cats { overflow-x: auto; flex-wrap: nowrap; padding-bottom: 4px; }
+  .pr-cat { white-space: nowrap; }
+}
+@media (max-width: 620px) {
+  .pr-grid { grid-template-columns: 1fr; }
+  .pr-wrap, .pr-grid, .pr-detail { padding-left: 16px !important; padding-right: 16px !important; }
+}
+</style>
+<link rel="icon" href="favicon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GIREX">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="site-extra.css">
+<meta property="og:title" content="Узел отбора проб для линии сточных вод — проект GIREX">
+<meta property="og:description" content="Спроектировали и собрали узел с шаровыми кранами и фильтром под стеснённые условия монтажа.">
+<meta property="og:url" content="https://nekitmurtazin.github.io/girex-site/project-nestandartnyy-uzel-otbora-proby.html">
+<meta property="og:image" content="https://nekitmurtazin.github.io/girex-site/v-yzqm1112.webp">
+<link rel="canonical" href="https://nekitmurtazin.github.io/girex-site/project-nestandartnyy-uzel-otbora-proby.html">
+</head>
+<body>
+
+<div class="site-header" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 84px; padding: 0 56px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4">
+<a href="index.html" style="display: flex; align-items: center"><img src="logo.webp" alt="GIREX — трубопроводная арматура" width="133" height="44" style="height: 44px; width: auto; display: block"></a>
+<div class="main-nav" style="display: flex; align-items: center; gap: 32px">
+<a class="nav-link" href="about.html">О компании</a>
+<a class="nav-link" href="catalog.html">Каталог</a>
+<a class="nav-link" href="about.html#proizvodstvo">Производство</a>
+<a class="nav-link" href="services.html">Услуги</a>
+<a class="nav-link" href="projects.html" style="color: var(--accent)">Проекты</a>
+<a class="nav-link" href="contacts.html">Контакты</a>
+</div>
+<div style="display: flex; align-items: center; gap: 16px"><button class="burger" type="button" aria-label="Меню" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#16181D" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+
+<a class="cart-link" href="cart.html" title="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="cart-badge" data-cart-count>0</span></a>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><a href="tel:+79101360087" style="font-size: 18px; font-weight: 700; color: #16181D">+7 910 136-00-87</a><div style="font-size: 12px; color: #8A8F98">Пн – Пт, 9:00 – 18:00</div></div>
+<a href="index.html#zayavka" class="btn-primary" style="height: 48px; padding: 0 22px; font-size: 15px">Связаться с менеджером</a>
+</div>
+</div>
+
+<div class="mobile-menu" id="mobile-menu">
+<a href="about.html">О компании</a>
+<a href="catalog.html">Каталог</a>
+<a href="about.html#proizvodstvo">Склад и отгрузка</a>
+<a href="services.html">Услуги</a>
+<a href="projects.html">Проекты</a>
+<a href="contacts.html">Контакты</a>
+<a href="index.html#zayavka" class="btn-primary mm-cta">Запросить цену и срок</a>
+</div>
+
+<!-- ШАПКА СТРАНИЦЫ -->
+<div style="padding: 20px 56px 0">
+  <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A8F98; flex-wrap: wrap"><a href="index.html" style="color: #8A8F98">Главная</a><span>/</span><a href="projects.html" style="color: #8A8F98">Проекты</a><span>/</span><span id="pr-crumb" style="color: #16181D; font-weight: 600"></span></div>
+</div>
+
+<div class="pr-detail" id="pr-detail" data-slug="nestandartnyy-uzel-otbora-proby"></div>
+
+<div style="padding: 32px 56px 88px"><a href="projects.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Все проекты</a></div>
+
+<div style="display: flex; align-items: center; justify-content: space-between; background: #16181D; color: #FFFFFF; padding: 28px 56px">
+<div style="font-size: 13px; color: #8A8F98">© 2026 ООО «ГИРЕКС». Все права защищены.</div>
+<div style="display: flex; gap: 24px"><a href="privacy.html" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="consent.html" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
+</div>
+
+<script src="cart.js"></script>
+<div class="mobile-bar">
+<a class="mb-call" href="tel:+79101360087"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M18 14.2v2.4a1.6 1.6 0 0 1-1.8 1.6A15.9 15.9 0 0 1 1.8 3.8 1.6 1.6 0 0 1 3.4 2h2.4a1.6 1.6 0 0 1 1.6 1.4c.1.8.3 1.5.6 2.2a1.6 1.6 0 0 1-.4 1.7l-1 1a12.8 12.8 0 0 0 4.8 4.8l1-1a1.6 1.6 0 0 1 1.7-.4c.7.3 1.4.5 2.2.6a1.6 1.6 0 0 1 1.4 1.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Позвонить</a>
+<a class="mb-spec" href="index.html#zayavka">Запросить цену</a>
+</div>
+<script src="cart.js"></script>
+<script src="projects.js"></script>
+</body>
+</html>

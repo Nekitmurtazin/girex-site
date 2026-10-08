@@ -112,6 +112,19 @@ window.sendRequest = function (fields, mailtoBody) {
   });
 };
 
+  /* ——— мобильное меню ——— */
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('.burger');
+    var menu = document.getElementById('mobile-menu');
+    if (!menu) return;
+    if (b) {
+      var open = menu.classList.toggle('open');
+      b.setAttribute('aria-expanded', String(open));
+    } else if (!e.target.closest('.mobile-menu')) {
+      menu.classList.remove('open');
+    }
+  });
+
   document.addEventListener('DOMContentLoaded', paintBadge);
   paintBadge();
 })();

@@ -2,245 +2,231 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Товар — GIREX</title>
-<meta name="description" content="Карточка изделия GIREX: характеристики, материалы, присоединительные размеры, стандарты.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Трубопроводная арматура — GIREX</title>
+<meta name="description" content="Характеристики, исполнения, материалы и присоединительные размеры позиции каталога GIREX.">
+<link rel="canonical" href="https://nekitmurtazin.github.io/girex-site/product.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GIREX">
+<meta property="og:title" content="Трубопроводная арматура — GIREX">
+<meta property="og:description" content="Характеристики, исполнения, материалы и присоединительные размеры позиции каталога GIREX.">
+<meta property="og:url" content="https://nekitmurtazin.github.io/girex-site/product.html">
+<meta property="og:image" content="https://nekitmurtazin.github.io/girex-site/og-cover.jpg">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.png" type="image/png">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
 <style>
-body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 1440px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
+body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 320px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
 * { box-sizing: border-box; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-dark); }
-.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #FFFFFF; border-radius: 10px; padding: 0 28px; height: 56px; font-size: 16px; font-weight: 600; cursor: pointer; }
+.btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 10px; background: var(--accent); color: #FFFFFF; border: 0; border-radius: 10px; padding: 0 28px; height: 56px; font-family: inherit; font-size: 16px; font-weight: 600; cursor: pointer; }
 .btn-primary:hover { background: var(--accent-dark); color: #FFFFFF; }
+.btn-primary:disabled { background: #C8CDC9; cursor: not-allowed; }
+.btn-doc { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 52px; padding: 0 20px; border: 1px solid #D8D6D2; border-radius: 10px; background: #FFFFFF; color: #16181D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
+.btn-doc:hover { border-color: var(--accent); color: var(--accent); }
 .nav-link { color: #16181D; font-size: 15px; font-weight: 500; }
 .nav-link:hover { color: var(--accent); }
-html { scroll-behavior: smooth; scroll-padding-top: 100px; }
-.site-header { position: sticky; top: 0; z-index: 100; }
-.btn-doc { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 56px; padding: 0 24px; border: 1px solid #D8D6D2; border-radius: 10px; background: #FFFFFF; color: #16181D; font-family: inherit; font-size: 15px; font-weight: 600; cursor: pointer; }
-.btn-doc:hover { border-color: var(--accent); color: var(--accent); }
-.card-title { color: #16181D; }
-.card-title:hover { color: var(--accent); }
-.toast { position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px); background: #16181D; color: #FFFFFF; padding: 14px 22px; border-radius: 12px; font-size: 14px; font-weight: 500; box-shadow: 0 14px 36px rgba(22, 24, 29, 0.25); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 200; }
-.toast.show { opacity: 1; transform: translate(-50%, 0); }
-html { background: #F5F5F4; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; background: #F5F5F4; }
 body { max-width: 1920px; margin-left: auto; margin-right: auto; }
-.spec-row { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; border-bottom: 1px solid #F0EEEA; font-size: 15px; }
-.spec-row span:first-child { color: #8A8F98; flex-shrink: 0; }
-.spec-row span:last-child { font-weight: 600; text-align: right; }
-.h2 { font-size: 24px; font-weight: 800; letter-spacing: -0.01em; }
-.block { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 20px; padding: 32px 36px; display: flex; flex-direction: column; gap: 18px; }
-table.data { border-collapse: collapse; width: 100%; font-size: 13.5px; }
-table.data th, table.data td { border: 1px solid #EAE8E4; padding: 8px 12px; text-align: left; }
-table.data th { background: #FAFAF9; font-weight: 700; }
-table.data td:first-child { color: #5C6470; }
-.scroll { overflow-x: auto; }
-ul.feat { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.55; color: #5C6470; }
+.site-header { position: sticky; top: 0; z-index: 100; }
 .cart-link { position: relative; display: flex; align-items: center; color: #16181D; }
 .cart-link:hover { color: var(--accent); }
 .cart-badge { position: absolute; top: -7px; left: 13px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #FFFFFF; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; display: none; }
-.vfield { display: flex; flex-direction: column; gap: 5px; font-size: 12px; color: #8A8F98; }
-.vfield select, .vfield input { background: #FFFFFF; border: 1px solid #E4E2DF; border-radius: 10px; padding: 11px 12px; font-family: inherit; font-size: 14px; color: #16181D; min-width: 150px; }
-.vfield select:focus, .vfield input:focus { outline: none; border-color: var(--accent); }
+.toast { position: fixed; left: 50%; bottom: 32px; transform: translate(-50%, 20px); background: #16181D; color: #FFFFFF; padding: 14px 22px; border-radius: 12px; font-size: 14px; font-weight: 500; box-shadow: 0 14px 36px rgba(22, 24, 29, 0.25); opacity: 0; pointer-events: none; transition: opacity .2s ease, transform .2s ease; z-index: 200; }
+.toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+/* ——— раскладка карточки: галерея / центр / выбор ——— */
+.p-main { display: grid; grid-template-columns: 420px minmax(0, 1fr) 330px; gap: 28px; padding: 24px 56px 0; align-items: start; }
+.p-box { background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 20px; padding: 24px; }
+.gallery { display: grid; grid-template-columns: 68px minmax(0, 1fr); gap: 14px; }
+.thumbs { display: flex; flex-direction: column; gap: 10px; }
+.thumb { height: 68px; border: 1px solid #EAE8E4; border-radius: 10px; background: #FFFFFF; padding: 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.thumb.active { border-color: var(--accent); }
+.thumb img { max-width: 100%; max-height: 100%; object-fit: contain; }
+.thumb span { font-size: 10px; color: #8A8F98; text-align: center; line-height: 1.2; }
+.stage { height: 420px; display: flex; align-items: center; justify-content: center; background: #FAFAF9; border-radius: 14px; padding: 24px; }
+.stage img { max-width: 100%; max-height: 100%; object-fit: contain; }
+
+.status { display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 12px; border-radius: 999px; font-size: 12.5px; font-weight: 700; background: var(--accent-soft); color: var(--accent); }
+.status.wait { background: #FFF4E2; color: #9A5B06; }
+.p-art { display: flex; gap: 18px; flex-wrap: wrap; font-size: 13px; color: #8A8F98; }
+.p-art b { color: #16181D; font-weight: 700; }
+.spec-row { display: flex; justify-content: space-between; gap: 24px; padding: 13px 0; border-bottom: 1px solid #F0EEEA; font-size: 15px; }
+.spec-row span:first-child { color: #8A8F98; flex-shrink: 0; }
+.spec-row span:last-child { font-weight: 600; text-align: right; }
+.spec-row.exact span:last-child { color: var(--accent); }
+
+.picker { position: sticky; top: 104px; display: flex; flex-direction: column; gap: 16px; }
+.pick-title { font-size: 17px; font-weight: 800; }
+.pick-field { display: flex; flex-direction: column; gap: 7px; }
+.pick-field > span { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #8A8F98; }
+.pick-opts { display: flex; gap: 8px; flex-wrap: wrap; }
+.opt { height: 38px; padding: 0 14px; border: 1px solid #E4E2DF; border-radius: 9px; background: #FFFFFF; font-family: inherit; font-size: 14px; font-weight: 600; color: #16181D; cursor: pointer; }
+.opt:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
+.opt.on { background: var(--accent); border-color: var(--accent); color: #FFFFFF; }
+.opt:disabled { color: #BFC4C0; border-style: dashed; cursor: not-allowed; text-decoration: line-through; background: repeating-linear-gradient(135deg, #FFFFFF 0 6px, #F6F6F4 6px 12px); }
+.pick-field select { height: 44px; padding: 0 12px; border: 1px solid #E4E2DF; border-radius: 10px; background: #FFFFFF; font-family: inherit; font-size: 15px; color: #16181D; cursor: pointer; }
+.pick-field select:focus { outline: none; border-color: var(--accent); }
+.pick-reset { border: 0; background: transparent; color: #8A8F98; font-family: inherit; font-size: 13px; cursor: pointer; text-align: left; padding: 0; }
+.pick-reset:hover { color: var(--accent); }
+.pick-note { font-size: 12.5px; line-height: 1.5; color: #8A8F98; }
+
+/* ——— вкладки ——— */
+.tabs { padding: 28px 56px 0; }
+.tabs-head { display: flex; gap: 6px; flex-wrap: wrap; border-bottom: 1px solid #EAE8E4; }
+.tab-btn { border: 0; background: transparent; padding: 14px 18px; font-family: inherit; font-size: 15px; font-weight: 600; color: #5C6470; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; }
+.tab-btn:hover { color: var(--accent); }
+.tab-btn.on { color: #16181D; border-bottom-color: var(--accent); }
+.tab-pane { display: none; background: #FFFFFF; border: 1px solid #EAE8E4; border-top: 0; border-radius: 0 0 20px 20px; padding: 28px 32px; }
+.tab-pane.on { display: block; }
+table.data { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+table.data th, table.data td { border: 1px solid #EAE8E4; padding: 8px 12px; text-align: left; }
+table.data th { background: #FAFAF9; font-weight: 700; }
+.scroll { overflow-x: auto; }
+ul.feat { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; line-height: 1.55; color: #5C6470; }
+.rel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
+.rel-card { display: flex; flex-direction: column; gap: 8px; border: 1px solid #EAE8E4; border-radius: 14px; padding: 14px; color: #16181D; }
+.rel-card:hover { border-color: var(--accent); color: #16181D; }
+.rel-card img { height: 110px; object-fit: contain; }
+.rel-card b { font-size: 14px; font-weight: 700; line-height: 1.3; }
+.rel-card span { font-size: 12.5px; color: #8A8F98; }
+.muted { font-size: 14.5px; line-height: 1.6; color: #5C6470; }
+
+.burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid #E4E2DF; border-radius: 10px; background: #FFFFFF; cursor: pointer; flex-shrink: 0; }
+.mobile-menu { display: none; flex-direction: column; gap: 2px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4; padding: 8px 20px 16px; position: sticky; top: 84px; z-index: 99; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: 12px 4px; font-size: 16px; font-weight: 500; color: #16181D; border-bottom: 1px solid #F3F1EE; }
+.mobile-menu .mm-cta { margin-top: 10px; border: 0; }
+.mobile-bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, 0.97); border-top: 1px solid #EAE8E4; }
+.mobile-bar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 10px; font-size: 15px; font-weight: 600; }
+.mobile-bar .mb-call { border: 1px solid #D8D6D2; color: #16181D; background: #FFFFFF; }
+.mobile-bar .mb-spec { background: var(--accent); color: #FFFFFF; }
+
+@media (max-width: 1340px) { .p-main, .tabs { padding-left: 32px !important; padding-right: 32px !important; } }
+@media (max-width: 1200px) {
+  .p-main { grid-template-columns: minmax(0, 1fr) 320px; }
+  .gallery { grid-column: 1 / -1; grid-template-columns: 68px minmax(0, 1fr); }
+}
+@media (max-width: 860px) {
+  .site-header { gap: 12px !important; }
+  .site-header a.btn-primary { display: none !important; }
+  .site-header [style*="flex-direction: column; align-items: flex-end"] { display: none !important; }
+  .main-nav { display: none !important; }
+  .burger { display: flex; }
+  .mobile-bar { display: flex; }
+  body { padding-bottom: 76px; }
+  .p-main { grid-template-columns: 1fr; }
+  .picker { position: static; }
+  .stage { height: 280px; }
+  .gallery { grid-template-columns: 56px minmax(0, 1fr); }
+  .thumb { height: 56px; }
+}
+@media (max-width: 560px) {
+  .p-main, .tabs { padding-left: 16px !important; padding-right: 16px !important; }
+  .site-header img[src*="logo"] { height: 34px !important; }
+  .tab-pane { padding: 20px 16px; }
+}
 </style>
-<link rel="icon" href="favicon.png" type="image/png">
+
+<link rel="stylesheet" href="site-extra.css">
 </head>
 <body>
 
-<div class="site-header" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 84px; padding: 0 56px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4">
+<div class="site-header" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 84px; padding: 0 20px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4">
 <a href="index.html" style="display: flex; align-items: center"><img src="logo.webp" alt="GIREX — трубопроводная арматура" width="133" height="44" style="height: 44px; width: auto; display: block"></a>
-<div style="display: flex; align-items: center; gap: 32px">
+<div class="main-nav" style="display: flex; align-items: center; gap: 32px">
 <a class="nav-link" href="about.html">О компании</a>
 <a class="nav-link" href="catalog.html" style="color: var(--accent)">Каталог</a>
-<a class="nav-link" href="about.html#proizvodstvo">Производство</a>
+<a class="nav-link" href="about.html#proizvodstvo">Склад и отгрузка</a>
 <a class="nav-link" href="services.html">Услуги</a>
 <a class="nav-link" href="projects.html">Проекты</a>
 <a class="nav-link" href="contacts.html">Контакты</a>
 </div>
-<div style="display: flex; align-items: center; gap: 24px">
+<div style="display: flex; align-items: center; gap: 16px">
+<button class="burger" type="button" aria-label="Меню" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#16181D" stroke-width="1.8" stroke-linecap="round"/></svg></button>
 <a class="cart-link" href="cart.html" title="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="cart-badge" data-cart-count>0</span></a>
 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><a href="tel:+79101360087" style="font-size: 18px; font-weight: 700; color: #16181D">+7 910 136-00-87</a><div style="font-size: 12px; color: #8A8F98">Пн – Пт, 9:00 – 18:00</div></div>
-<a href="index.html#zayavka" class="btn-primary" style="height: 48px; padding: 0 22px; font-size: 15px">Связаться с менеджером</a>
+<a href="index.html#zayavka" class="btn-primary" style="height: 48px; padding: 0 22px; font-size: 15px">Запросить цену и срок</a>
 </div>
 </div>
 
-<div style="display: flex; flex-direction: column; gap: 24px; padding: 40px 56px 0">
-<div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A8F98"><a href="index.html" style="color: #8A8F98">Главная</a><span>/</span><a href="catalog.html" style="color: #8A8F98">Каталог</a><span>/</span><a id="p-group" href="catalog.html" style="color: #8A8F98"></a><span>/</span><span id="p-crumb" style="color: #16181D; font-weight: 600"></span></div>
-
-<div id="p-card" style="display: grid; grid-template-columns: 560px minmax(0, 1fr); gap: 48px; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 24px; padding: 40px">
-<div style="height: 480px; display: flex; align-items: center; justify-content: center; background: #FAFAF9; border-radius: 16px; padding: 32px"><img id="p-img" src="" alt="" style="max-width: 100%; max-height: 100%; object-fit: contain"></div>
-<div style="display: flex; flex-direction: column; gap: 20px">
-<div style="display: flex; gap: 8px; flex-wrap: wrap" id="p-models"></div>
-<h1 id="p-name" style="font-size: 32px; font-weight: 800; line-height: 1.2; letter-spacing: -0.01em; margin: 0"></h1>
-<div style="display: flex; flex-direction: column">
-<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #8A8F98; padding-bottom: 6px">ХАРАКТЕРИСТИКИ</div>
-<div id="p-specs"></div>
-</div>
-<div id="p-variants" style="display: none; flex-direction: column; gap: 10px; background: #FAFAF9; border: 1px solid #EFEDE9; border-radius: 14px; padding: 18px 20px">
-<div style="font-size: 13px; font-weight: 600; letter-spacing: 0.14em; color: #8A8F98">ИСПОЛНЕНИЕ</div>
-<div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end" id="p-variant-fields"></div>
-</div>
-<div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; padding-top: 12px">
-<button type="button" class="btn-primary" id="p-add" style="border: 0; font-family: inherit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="#FFFFFF" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.3" fill="#FFFFFF"/><circle cx="17.5" cy="20" r="1.3" fill="#FFFFFF"/></svg>В корзину</button>
-<a href="index.html#zayavka" class="btn-doc"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M18 14.2v2.4a1.6 1.6 0 0 1-1.8 1.6A15.9 15.9 0 0 1 1.8 3.8 1.6 1.6 0 0 1 3.4 2h2.4a1.6 1.6 0 0 1 1.6 1.4c.1.8.3 1.5.6 2.2a1.6 1.6 0 0 1-.4 1.7l-1 1a12.8 12.8 0 0 0 4.8 4.8l1-1a1.6 1.6 0 0 1 1.7-.4c.7.3 1.4.5 2.2.6a1.6 1.6 0 0 1 1.4 1.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Связаться с менеджером</a>
-<button type="button" class="btn-doc" id="p-certs"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><path d="M13 23c5 0 9-2.5 9-9V6l-9-3-9 3v8c0 6.5 4 9 9 9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="m9 12.5 3 3 5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Сертификаты</button>
-<button type="button" class="btn-doc" id="p-draws"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><path d="M15 3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M9 13h8M9 17h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Чертежи</button>
-</div>
-</div>
+<div class="mobile-menu" id="mobile-menu">
+<a href="about.html">О компании</a>
+<a href="catalog.html">Каталог</a>
+<a href="about.html#proizvodstvo">Склад и отгрузка</a>
+<a href="services.html">Услуги</a>
+<a href="projects.html">Проекты</a>
+<a href="contacts.html">Контакты</a>
+<a href="index.html#zayavka" class="btn-primary mm-cta">Запросить цену и срок</a>
 </div>
 
-<div id="p-blocks" style="display: flex; flex-direction: column; gap: 20px"></div>
-<div id="p-missing" style="display: none; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 24px; padding: 56px; font-size: 18px">Товар не найден. <a href="catalog.html">Вернуться в каталог</a></div>
+<div style="padding: 20px 56px 0">
+<div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A8F98; flex-wrap: wrap"><a href="index.html" style="color: #8A8F98">Главная</a><span>/</span><a href="catalog.html" style="color: #8A8F98">Каталог</a><span>/</span><a id="p-group" href="catalog.html" style="color: #8A8F98"></a><span>/</span><span id="p-crumb" style="color: #16181D; font-weight: 600"></span></div>
 </div>
+
+<div class="p-main" id="p-main">
+  <div class="p-box gallery">
+    <div class="thumbs" id="p-thumbs"></div>
+    <div class="stage"><img id="p-img" src="" alt=""></div>
+  </div>
+
+  <div class="p-box" style="display: flex; flex-direction: column; gap: 16px">
+    <div style="display: flex; gap: 10px; flex-wrap: wrap; align-items: center">
+      <span class="status wait" id="p-status">Исполнение не выбрано</span>
+      <span style="font-size: 12.5px; color: #8A8F98" id="p-group-label"></span>
+    </div>
+    <h1 id="p-name" style="font-size: 29px; font-weight: 800; line-height: 1.22; letter-spacing: -0.01em; margin: 0"></h1>
+    <div class="p-art">
+      <span>Артикул: <b id="p-article">—</b></span>
+      <span>Серия: <b id="p-family">—</b></span>
+    </div>
+    <div id="p-lead" class="muted"></div>
+    <div>
+      <div style="font-size: 12px; font-weight: 600; letter-spacing: 0.08em; color: #8A8F98; padding-bottom: 4px">ХАРАКТЕРИСТИКИ</div>
+      <div id="p-specs"></div>
+    </div>
+  </div>
+
+  <div class="p-box picker">
+    <div class="pick-title">Выбор исполнения</div>
+    <div id="p-fields" style="display: flex; flex-direction: column; gap: 14px"></div>
+    <button type="button" class="pick-reset" id="p-reset">Сбросить параметры</button>
+    <button type="button" class="btn-primary" id="p-ask" style="width: 100%">Узнать цену и наличие</button>
+    <button type="button" class="btn-doc" id="p-add" style="width: 100%">Добавить в заявку</button>
+    <div class="pick-note" id="p-note">Цену и срок поставки подтверждает менеджер: отвечаем в рабочее время в течение 2 часов.</div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tabs-head" id="tabs-head"></div>
+  <div id="tab-opisanie" class="tab-pane"></div>
+  <div id="tab-harakteristiki" class="tab-pane"></div>
+  <div id="tab-dokumentaciya" class="tab-pane"></div>
+  <div id="tab-sovmestimye" class="tab-pane"></div>
+  <div id="tab-analogi" class="tab-pane"></div>
+</div>
+
+<div id="p-missing" style="display: none; margin: 32px 56px 88px; background: #FFFFFF; border: 1px solid #EAE8E4; border-radius: 24px; padding: 56px; font-size: 18px">Позиция не найдена. <a href="catalog.html">Вернуться в каталог</a></div>
 
 <div style="padding: 32px 56px 88px"><a href="catalog.html" style="display: inline-flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 600"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8h-11M7 3.5 2.5 8 7 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>Назад в каталог</a></div>
 
 <div style="display: flex; align-items: center; justify-content: space-between; background: #16181D; color: #FFFFFF; padding: 28px 56px">
 <div style="font-size: 13px; color: #8A8F98">© 2026 ООО «ГИРЕКС». Все права защищены.</div>
-<div style="display: flex; gap: 24px"><a href="#" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="#" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
+<div style="display: flex; gap: 24px"><a href="privacy.html" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="consent.html" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
 </div>
 
 <div class="toast" id="toast"></div>
-<script>
-document.addEventListener('click', function (e) {
-  var b = e.target.closest('[data-stub]');
-  if (!b) return;
-  var t = document.getElementById('toast');
-  t.textContent = b.getAttribute('data-stub');
-  t.classList.add('show');
-  clearTimeout(t._h);
-  t._h = setTimeout(function () { t.classList.remove('show'); }, 2500);
-});
+<div class="mobile-bar">
+<a class="mb-call" href="tel:+79101360087"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M18 14.2v2.4a1.6 1.6 0 0 1-1.8 1.6A15.9 15.9 0 0 1 1.8 3.8 1.6 1.6 0 0 1 3.4 2h2.4a1.6 1.6 0 0 1 1.6 1.4c.1.8.3 1.5.6 2.2a1.6 1.6 0 0 1-.4 1.7l-1 1a12.8 12.8 0 0 0 4.8 4.8l1-1a1.6 1.6 0 0 1 1.7-.4c.7.3 1.4.5 2.2.6a1.6 1.6 0 0 1 1.4 1.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Позвонить</a>
+<a class="mb-spec" href="index.html#zayavka">Запросить цену</a>
+</div>
 
-var GROUP_ANCHOR = { shar: 'g-shar', zadv: 'g-zadv', rezb: 'g-rezb', kov: 'g-kov', filtr: 'g-filtr', flanec: 'g-flanec', fiting: 'g-fiting' };
-
-function el(tag, props, text) {
-  var n = document.createElement(tag);
-  Object.assign(n, props || {});
-  if (text != null) n.textContent = text;
-  return n;
-}
-
-function block(title, node) {
-  var b = el('div', { className: 'block' });
-  b.appendChild(el('div', { className: 'h2' }, title));
-  b.appendChild(node);
-  return b;
-}
-
-function table(head, rows) {
-  var wrap = el('div', { className: 'scroll' });
-  var t = el('table', { className: 'data' });
-  if (head) {
-    var tr = el('tr');
-    head.forEach(function (h) { tr.appendChild(el('th', null, h || '')); });
-    t.appendChild(tr);
-  }
-  rows.forEach(function (r) {
-    var tr = el('tr');
-    r.forEach(function (c) { tr.appendChild(el('td', null, c == null ? '' : c)); });
-    t.appendChild(tr);
-  });
-  wrap.appendChild(t);
-  return wrap;
-}
-
-function render(p) {
-  document.title = p.name + ' — GIREX';
-  var ga = document.getElementById('p-group');
-  ga.textContent = p.groupName;
-  ga.href = 'catalog.html#' + (GROUP_ANCHOR[p.group] || '');
-  document.getElementById('p-crumb').textContent = p.models[0] || p.name.slice(0, 40);
-  document.getElementById('p-name').textContent = p.name;
-  var img = document.getElementById('p-img');
-  if (p.img) { img.src = p.img; img.alt = p.name; } else { img.remove(); }
-
-  var mb = document.getElementById('p-models');
-  (p.models.length ? p.models : [p.groupName]).forEach(function (m) {
-    var s = el('span', null, m);
-    s.style.cssText = 'background: var(--accent-soft); color: var(--accent); border-radius: 6px; padding: 4px 12px; font-size: 13px; font-weight: 700';
-    mb.appendChild(s);
-  });
-
-  var sp = document.getElementById('p-specs');
-  p.specs.forEach(function (s) {
-    var row = el('div', { className: 'spec-row' });
-    row.appendChild(el('span', null, s[0]));
-    row.appendChild(el('span', null, s[1]));
-    sp.appendChild(row);
-  });
-
-  var blocks = document.getElementById('p-blocks');
-  if (p.features && p.features.length) {
-    var ul = el('ul', { className: 'feat' });
-    p.features.forEach(function (f) { ul.appendChild(el('li', null, f)); });
-    blocks.appendChild(block('Описание и технические требования', ul));
-  }
-  if (p.materials && p.materials.length) {
-    blocks.appendChild(block('Комплектующие и материалы', table(['Деталь', 'Материал'], p.materials)));
-  }
-  if (p.dims && p.dims.rows && p.dims.rows.length) {
-    blocks.appendChild(block('Присоединительные и габаритные размеры, мм', table(p.dims.head, p.dims.rows)));
-  }
-  if (p.standards && p.standards.length) {
-    var d = el('div', null, p.standards.join(' · '));
-    d.style.cssText = 'font-size: 14.5px; line-height: 1.6; color: #5C6470';
-    blocks.appendChild(block('Стандарты', d));
-  }
-
-  var v = p.variants || { sizes: [], models: [] };
-  var fields = document.getElementById('p-variant-fields');
-  var picked = { model: v.models && v.models.length === 1 ? v.models[0] : '', size: '', qty: 1 };
-
-  function addSelect(label, name, options) {
-    var w = el('label', { className: 'vfield' });
-    w.appendChild(el('span', null, label));
-    var sel = el('select');
-    sel.appendChild(el('option', { value: '' }, 'не выбрано'));
-    options.forEach(function (o) { sel.appendChild(el('option', { value: o }, o)); });
-    sel.onchange = function () { picked[name] = sel.value; };
-    w.appendChild(sel);
-    fields.appendChild(w);
-  }
-  if (v.models && v.models.length > 1) addSelect('Модель', 'model', v.models);
-  if (v.sizes && v.sizes.length) addSelect('Типоразмер', 'size', v.sizes);
-
-  var qw = el('label', { className: 'vfield' });
-  qw.appendChild(el('span', null, 'Количество, шт.'));
-  var qi = el('input', { value: '1', inputMode: 'numeric' });
-  qi.style.minWidth = '110px';
-  qi.onchange = function () { picked.qty = Math.max(1, parseInt(qi.value, 10) || 1); qi.value = picked.qty; };
-  qw.appendChild(qi);
-  fields.appendChild(qw);
-  document.getElementById('p-variants').style.display = 'flex';
-
-  document.getElementById('p-add').onclick = function () {
-    Cart.add({ id: p.id, name: p.name, model: picked.model || (v.models[0] || ''), size: picked.size, qty: picked.qty });
-    cartToast('Добавлено в корзину: ' + (picked.size ? p.name.slice(0, 32) + ', ' + picked.size : p.name.slice(0, 44)));
-  };
-
-  var code = p.models[0] || p.name;
-  document.getElementById('p-certs').setAttribute('data-stub', 'Сертификаты для ' + code + ' скоро появятся');
-  document.getElementById('p-draws').setAttribute('data-stub', 'Чертежи для ' + code + ' скоро появятся');
-}
-
-fetch('products.json')
-  .then(function (r) { return r.json(); })
-  .then(function (list) {
-    var id = new URLSearchParams(location.search).get('id');
-    var p = list.filter(function (x) { return x.id === id; })[0];
-    if (!p) {
-      document.getElementById('p-card').style.display = 'none';
-      document.getElementById('p-missing').style.display = 'block';
-      return;
-    }
-    render(p);
-  })
-  .catch(function () {
-    document.getElementById('p-card').style.display = 'none';
-    document.getElementById('p-missing').style.display = 'block';
-  });
-</script>
 <script src="cart.js"></script>
+<script src="product.js"></script>
+
 </body>
 </html>

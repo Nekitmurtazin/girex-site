@@ -2,12 +2,12 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>О компании — GIREX</title>
-<meta name="description" content="GIREX — производитель трубопроводной арматуры и металлоизделий для строительства, ЖКХ и промышленности. Собственное производство, ГОСТ и ТУ, поставки по России и СНГ.">
+<meta name="description" content="GIREX — поставка трубопроводной арматуры со склада в Щёлково. Наличие, сроки, документы на каждую партию.">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700;800&display=swap">
 <style>
-body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 1440px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
+body { margin: 0; font-family: 'Onest', 'Helvetica Neue', Arial, sans-serif; background: #F5F5F4; color: #16181D; -webkit-font-smoothing: antialiased; min-width: 320px; --accent: #1A8440; --accent-soft: rgba(26, 132, 64, 0.09); --accent-dark: rgb(20, 103, 50); }
 * { box-sizing: border-box; }
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-dark); }
@@ -30,14 +30,116 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 .cart-link { position: relative; display: flex; align-items: center; color: #16181D; }
 .cart-link:hover { color: var(--accent); }
 .cart-badge { position: absolute; top: -7px; left: 13px; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 999px; background: var(--accent); color: #FFFFFF; font-size: 11px; font-weight: 700; align-items: center; justify-content: center; display: none; }
+
+/* ---------- адаптив ---------- */
+.burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border: 1px solid #E4E2DF; border-radius: 10px; background: #FFFFFF; cursor: pointer; flex-shrink: 0; }
+.mobile-menu { display: none; flex-direction: column; gap: 2px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4; padding: 8px 20px 16px; position: sticky; top: 84px; z-index: 99; }
+.mobile-menu.open { display: flex; }
+.mobile-menu a { padding: 12px 4px; font-size: 16px; font-weight: 500; color: #16181D; border-bottom: 1px solid #F3F1EE; }
+.mobile-menu .mm-cta { margin-top: 10px; border: 0; }
+.mobile-bar { display: none; position: fixed; left: 0; right: 0; bottom: 0; z-index: 120; gap: 10px; padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px)); background: rgba(255, 255, 255, 0.97); border-top: 1px solid #EAE8E4; }
+.mobile-bar a { flex: 1; display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; border-radius: 10px; font-size: 15px; font-weight: 600; }
+.mobile-bar .mb-call { border: 1px solid #D8D6D2; color: #16181D; background: #FFFFFF; }
+.mobile-bar .mb-spec { background: var(--accent); color: #FFFFFF; }
+
+@media (max-width: 1340px) {
+  [style*="padding: 88px 56px"] { padding: 64px 32px !important; }
+  [style*="padding: 56px 56px"] { padding: 40px 32px !important; }
+  [style*="padding: 48px 56px"] { padding: 32px 32px !important; }
+  [style*="padding: 40px 56px"] { padding: 28px 32px !important; }
+  [style*="padding: 32px 56px"] { padding: 24px 32px !important; }
+  [style*="padding: 28px 56px"] { padding: 20px 32px !important; }
+  [style*="padding: 0 56px"] { padding: 0 32px !important; }
+  [style*="height: 84px; padding: 0 56px"] { padding: 0 20px !important; }
+  [style*="padding: 60px 56px 76px"] { padding: 40px 32px 56px !important; }
+}
+
+@media (max-width: 1100px) {
+  [style*="repeat(4, minmax"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="repeat(3, minmax"] { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  [style*="width: 620px"] { width: auto !important; }
+  [style*="width: 560px minmax"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: 560px"] { grid-template-columns: 1fr !important; }
+  [style*="grid-template-columns: minmax(0, 1fr) 460px"] { grid-template-columns: 1fr !important; }
+  [style*="width: 480px"] { width: auto !important; }
+  [style*="font-size: 58px"] { font-size: 40px !important; }
+  [style*="font-size: 54px"] { font-size: 38px !important; }
+  [style*="font-size: 42px"] { font-size: 32px !important; }
+  [style*="font-size: 34px"] { font-size: 27px !important; }
+  [style*="font-size: 32px; font-weight: 800; line-height: 1.2"] { font-size: 26px !important; }
+}
+
+@media (max-width: 860px) {
+  .main-nav { display: none !important; }
+  .burger { display: flex; }
+  .mobile-bar { display: flex; }
+  body { padding-bottom: 76px; }
+  [style*="repeat(2, minmax"], [style*="repeat(3, minmax"], [style*="repeat(4, minmax"] { grid-template-columns: 1fr !important; }
+  [style*="display: flex"][style*="gap: 56px"] { flex-direction: column !important; }
+  [style*="display: flex"][style*="gap: 48px"] { flex-direction: column !important; align-items: stretch !important; }
+  [style*="display: flex"][style*="gap: 64px"] { flex-direction: column !important; }
+  [style*="display: flex"][style*="gap: 36px"] { flex-direction: column !important; }
+  [style*="width: 540px"] { width: auto !important; }
+  [style*="width: 240px"] { width: auto !important; }
+  [style*="height: 580px"] { height: 0 !important; }
+  [style*="width: 920px"] { display: none !important; }
+  [style*="height: 480px"] { height: 300px !important; }
+  [style*="height: 460px"] { height: 240px !important; }
+  [style*="min-width: 1440px"] { min-width: 0 !important; }
+  .btn-primary, .btn-ghost { width: 100%; }
+  .mobile-menu { top: 72px; }
+}
+
+@media (max-width: 560px) {
+  [style*="padding: 88px 56px"], [style*="padding: 56px 56px"], [style*="padding: 48px 56px"],
+  [style*="padding: 40px 56px"], [style*="padding: 32px 56px"], [style*="padding: 28px 56px"],
+  [style*="padding: 0 56px"], [style*="padding: 60px 56px 76px"] { padding-left: 16px !important; padding-right: 16px !important; }
+  [style*="padding: 48px 56px"] { padding: 28px 18px !important; }
+  [style*="padding: 56px"] { padding: 24px 18px !important; }
+  [style*="padding: 40px"] { padding: 20px 16px !important; }
+  [style*="font-size: 58px"], [style*="font-size: 54px"] { font-size: 31px !important; }
+  [style*="font-size: 42px"] { font-size: 26px !important; }
+  [style*="font-size: 34px"] { font-size: 23px !important; }
+  [style*="font-size: 32px; font-weight: 800"] { font-size: 22px !important; }
+  [style*="font-size: 28px; font-weight: 800"] { font-size: 21px !important; }
+  [style*="height: 84px"] { height: 72px !important; }
+  [style*="height: 300px"] { height: 220px !important; }
+  table.data { font-size: 12.5px; }
+}
+
+@media (max-width: 860px) {
+  .site-header { gap: 12px !important; }
+  .site-header a.btn-primary { display: none !important; }
+  .site-header [style*="flex-direction: column; align-items: flex-end"] { display: none !important; }
+  [style*="display: flex"][style*="gap: 16px"] { flex-wrap: wrap !important; }
+  [style*="display: flex"][style*="gap: 12px"] { flex-wrap: wrap !important; }
+  [style*="display: flex; gap: 10px"] { flex-wrap: wrap !important; }
+  .cart-link { margin-left: auto; }
+}
+@media (max-width: 560px) {
+  .site-header img[src*="logo"] { height: 34px !important; }
+  [style*="letter-spacing: 0.14em"] { font-size: 11px !important; }
+}
 </style>
 <link rel="icon" href="favicon.png" type="image/png">
+<link rel="canonical" href="https://nekitmurtazin.github.io/girex-site/about.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="GIREX">
+<meta property="og:title" content="О компании — GIREX">
+<meta property="og:description" content="GIREX — поставка трубопроводной арматуры со склада в Щёлково. Наличие, сроки, документы на каждую партию.">
+<meta property="og:url" content="https://nekitmurtazin.github.io/girex-site/about.html">
+<meta property="og:image" content="https://nekitmurtazin.github.io/girex-site/og-cover.jpg">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="stylesheet" href="site-extra.css">
 </head>
 <body>
 
 <div class="site-header" style="display: flex; align-items: center; justify-content: space-between; gap: 32px; height: 84px; padding: 0 56px; background: #FFFFFF; border-bottom: 1px solid #EAE8E4">
 <a href="index.html" style="display: flex; align-items: center"><img src="logo.webp" alt="GIREX — трубопроводная арматура" width="133" height="44" style="height: 44px; width: auto; display: block"></a>
-<div style="display: flex; align-items: center; gap: 32px">
+<div class="main-nav" style="display: flex; align-items: center; gap: 32px">
 <a class="nav-link" href="about.html" style="color: var(--accent)">О компании</a>
 <a class="nav-link" href="catalog.html">Каталог</a>
 <a class="nav-link" href="about.html#proizvodstvo">Производство</a>
@@ -45,32 +147,43 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <a class="nav-link" href="projects.html">Проекты</a>
 <a class="nav-link" href="contacts.html">Контакты</a>
 </div>
-<div style="display: flex; align-items: center; gap: 24px">
+<div style="display: flex; align-items: center; gap: 16px"><button class="burger" type="button" aria-label="Меню" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M4 7h16M4 12h16M4 17h16" stroke="#16181D" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+
 <a class="cart-link" href="cart.html" title="Корзина"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/><circle cx="10" cy="20" r="1.4" fill="currentColor"/><circle cx="17.5" cy="20" r="1.4" fill="currentColor"/></svg><span class="cart-badge" data-cart-count>0</span></a>
 <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px"><a href="tel:+79101360087" style="font-size: 18px; font-weight: 700; color: #16181D">+7 910 136-00-87</a><div style="font-size: 12px; color: #8A8F98">Пн – Пт, 9:00 – 18:00</div></div>
 <a href="index.html#zayavka" class="btn-primary" style="height: 48px; padding: 0 22px; font-size: 15px">Связаться с менеджером</a>
 </div>
 </div>
 
+<div class="mobile-menu" id="mobile-menu">
+<a href="about.html">О компании</a>
+<a href="catalog.html">Каталог</a>
+<a href="about.html#proizvodstvo">Склад и отгрузка</a>
+<a href="services.html">Услуги</a>
+<a href="projects.html">Проекты</a>
+<a href="contacts.html">Контакты</a>
+<a href="index.html#zayavka" class="btn-primary mm-cta">Запросить цену и срок</a>
+</div>
+
 <!-- ШАПКА СТРАНИЦЫ -->
 <div style="display: flex; flex-direction: column; gap: 20px; padding: 56px 56px 0">
 <div style="display: flex; align-items: center; gap: 8px; font-size: 13px; color: #8A8F98"><a href="index.html" style="color: #8A8F98">Главная</a><span>/</span><span style="color: #16181D; font-weight: 600">О компании</span></div>
 <h1 style="font-size: 42px; font-weight: 800; letter-spacing: -0.01em; margin: 0; max-width: 860px">О компании GIREX</h1>
-<div style="font-size: 17px; line-height: 1.65; color: #5C6470; max-width: 760px">GIREX — производитель трубопроводной арматуры и металлоизделий для строительства, ЖКХ и промышленности. Выпускаем серийную продукцию по ГОСТ и ТУ и изготавливаем нестандартные изделия по чертежам заказчика. Работаем с юридическими лицами по всей России и СНГ: от разовых партий до долгосрочной комплектации объектов.</div>
+<div style="font-size: 17px; line-height: 1.65; color: #5C6470; max-width: 760px">GIREX — инженерная компания: поставляем трубопроводную арматуру и автоматизируем её. Подбираем привод под конкретную задвижку, проектируем и изготавливаем узел крепления, собираем пневмообвязку, испытываем и настраиваем. Ходовые позиции каталога держим на складе в Щёлково. Работаем с юридическими лицами по России и СНГ: от одной позиции до объекта под ключ.</div>
 <div style="display: flex; gap: 12px; flex-wrap: wrap">
 <div class="chip"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><path d="M13 23c5 0 9-2.5 9-9V6l-9-3-9 3v8c0 6.5 4 9 9 9Z" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"></path><path d="m9 12.5 3 3 5-5.5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><span>Сертификаты соответствия</span></div>
 <div class="chip"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><path d="M15 3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"></path><path d="M9 13h8M9 17h5" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"></path></svg><span>Паспорта на каждую партию</span></div>
-<div class="chip"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="var(--accent)" stroke-width="2"></circle><path d="M3 13h20M13 3c3 3 3 17 0 20-3-3-3-17 0-20Z" stroke="var(--accent)" stroke-width="2"></path></svg><span>Производство по ГОСТ и ТУ</span></div>
+<div class="chip"><svg width="16" height="16" viewBox="0 0 26 26" fill="none"><circle cx="13" cy="13" r="10" stroke="var(--accent)" stroke-width="2"></circle><path d="M3 13h20M13 3c3 3 3 17 0 20-3-3-3-17 0-20Z" stroke="var(--accent)" stroke-width="2"></path></svg><span>Продукция по ГОСТ и ТУ</span></div>
 </div>
 </div>
 
 <!-- ЦИФРЫ -->
 <div style="padding: 40px 56px 0">
 <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
-<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">12+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">лет на рынке металлоизделий</div></div>
-<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">3 500+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">типоразмеров в каталоге</div></div>
-<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">900+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">объектов укомплектовано</div></div>
-<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">70</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">регионов поставок в РФ и СНГ</div></div>
+<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">12+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">лет на рынке арматуры<span class="demo-mark" title="Выдуманные данные для демонстрации">демо</span></div></div>
+<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">3 500+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">типоразмеров в каталоге<span class="demo-mark" title="Выдуманные данные для демонстрации">демо</span></div></div>
+<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">900+</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">объектов укомплектовано<span class="demo-mark" title="Выдуманные данные для демонстрации">демо</span></div></div>
+<div class="card" style="gap: 6px"><div style="font-size: 32px; font-weight: 800; color: var(--accent)">70</div><div style="font-size: 14px; color: #5C6470; line-height: 1.4">регионов поставок в РФ и СНГ<span class="demo-mark" title="Выдуманные данные для демонстрации">демо</span></div></div>
 </div>
 </div>
 
@@ -80,22 +193,22 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <img src="workshop.jpg" alt="Производственная площадка GIREX" style="width: 100%; height: 460px; object-fit: cover; border-radius: 20px; display: block">
 <div style="position: absolute; left: 24px; bottom: 24px; background: rgba(255, 255, 255, 0.94); border-radius: 12px; padding: 14px 20px; display: flex; align-items: center; gap: 12px; box-shadow: 0 8px 24px rgba(22, 24, 29, 0.12)">
 <svg width="22" height="22" viewBox="0 0 26 26" fill="none"><path d="M13 23c5 0 9-2.5 9-9V6l-9-3-9 3v8c0 6.5 4 9 9 9Z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"></path><path d="m9 12.5 3 3 5-5.5" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg>
-<div style="font-size: 14px; font-weight: 600">Приёмка ОТК на каждой партии</div>
+<div style="font-size: 14px; font-weight: 600">Документы на каждую партию</div>
 </div>
 </div>
 <div style="display: flex; flex-direction: column; gap: 24px">
-<div class="h2" style="line-height: 1.2">Собственная производственная площадка</div>
-<div style="font-size: 16px; line-height: 1.6; color: #5C6470">Полный цикл изготовления металлоизделий — от раскроя металла до антикоррозийного покрытия и отгрузки со склада готовой продукции.</div>
+<h2 class="h2" style="line-height: 1.2; margin: 0">Склад и инженерный участок в Щёлково</h2>
+<div style="font-size: 16px; line-height: 1.6; color: #5C6470">На площадке в Щёлково — склад арматуры и участок, где мы проектируем, собираем и испытываем узлы автоматизации, а также обрабатываем детали на станках.</div>
 <div style="display: flex; flex-direction: column; gap: 14px">
-<div class="bullet">Плазменная и ленточная резка металлопроката</div>
-<div class="bullet">Сварочные посты и сборочные участки</div>
-<div class="bullet">Механическая обработка и нарезка резьбы</div>
-<div class="bullet">Покрытия: грунт, порошковая окраска, цинкование</div>
-<div class="bullet">Склад готовой продукции и серийных позиций</div>
+<div class="bullet">Ходовые типоразмеры DN50 – DN300 — в наличии</div>
+<div class="bullet">Позиции под заказ — от 14 дней, срок фиксируем в счёте</div>
+<div class="bullet">Проектирование и сборка узлов автоматизации</div>
+<div class="bullet">Отгрузка в 70 регионов, самовывоз со склада</div>
+<div class="bullet">Станочная обработка деталей и нестандартные узлы</div>
 </div>
 <div style="display: flex; gap: 16px">
 <a href="catalog.html" class="btn-primary">Смотреть каталог</a>
-<a href="index.html#zayavka" class="btn-ghost">Изготовление нестандартных изделий</a>
+<a href="index.html#zayavka" class="btn-ghost">Запросить цену и срок</a>
 </div>
 </div>
 </div>
@@ -103,33 +216,33 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <!-- КАК РАБОТАЕМ -->
 <div class="section">
 <div style="display: flex; flex-direction: column; gap: 12px; max-width: 720px">
-<div class="h2">Как мы работаем</div>
-<div style="font-size: 16px; line-height: 1.6; color: #5C6470">Работаем как производитель, а не перекупщик: отвечаем за сроки, качество и документы на каждом этапе.</div>
+<h2 class="h2" style="margin: 0">Как мы работаем</h2>
+<div style="font-size: 16px; line-height: 1.6; color: #5C6470">Отвечаем за весь путь: подбор, изготовление узла, сборку, испытания и документы. Наличие называем сразу, дату отгрузки пишем в счёте.</div>
 </div>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">01</div><div style="font-size: 17px; font-weight: 700">Заявка и расчёт</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Принимаем чертежи, эскизы и спецификации в любом формате. Инженер уточнит детали и подготовит расчёт за 1 рабочий день.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">02</div><div style="font-size: 17px; font-weight: 700">Договор и сроки</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Договор, счёт, УПД, работа с НДС. Срок производства фиксируем в счёте, серийные позиции отгружаем со склада.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">03</div><div style="font-size: 17px; font-weight: 700">Производство и ОТК</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Изготавливаем на собственной площадке. ОТК проверяет каждую партию, документы идут в комплекте с изделиями.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">04</div><div style="font-size: 17px; font-weight: 700">Отгрузка</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Доставка по всей России и СНГ, отгрузка партиями под график объекта.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">05</div><div style="font-size: 17px; font-weight: 700">Техническая поддержка</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Инженер поможет подобрать изделие под нагрузку и узел, предложит замену снятых с производства позиций.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">01</div><div style="font-size: 17px; font-weight: 700">Заявка и расчёт</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Принимаем спецификацию или описание узла: тип арматуры, DN, условия работы, нужное управление. Считаем за 1 рабочий день.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">02</div><div style="font-size: 17px; font-weight: 700">Договор и сроки</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Договор, счёт, УПД, работа с НДС. Дату отгрузки фиксируем в счёте: со склада 1–2 дня, под заказ от 14 дней.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">03</div><div style="font-size: 17px; font-weight: 700">Изготовление и сборка</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Изготавливаем узлы крепления, собираем привод и обвязку, проверяем работу и настраиваем крайние положения.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">04</div><div style="font-size: 17px; font-weight: 700">Отгрузка</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Доставка по России и СНГ, отгрузка партиями под график монтажа. Хранение оплаченной партии до 30 дней.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">05</div><div style="font-size: 17px; font-weight: 700">Техническая поддержка</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Инженер подберёт позицию под среду, давление и присоединение, предложит замену снятым и импортным маркам.</div></div>
 <div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">06</div><div style="font-size: 17px; font-weight: 700">Повторные поставки</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Одна отгрузка вместо десятка поставщиков. Специальные условия для постоянных партнёров.</div></div>
 </div>
 </div>
 
 <!-- ДЛЯ КОГО -->
 <div class="section">
-<div class="h2">Для кого мы работаем</div>
+<h2 class="h2" style="margin: 0">Для кого мы работаем</h2>
 <div style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px">
 <div class="card" style="background: #16181D; border-color: #16181D; color: #FFFFFF"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">01</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Строительным компаниям</div><div style="font-size: 13.5px; line-height: 1.55; color: #B9BDC4">Комплектация объектов от фундамента до кровли. Резервируем мощности под график вашей стройки.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">02</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Проектным организациям</div><div style="font-size: 13.5px; line-height: 1.55; color: #5C6470">Подбор изделий под требования проекта. Передадим чертежи и данные для рабочей документации.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">02</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Проектным организациям</div><div style="font-size: 13.5px; line-height: 1.55; color: #5C6470">Подбор позиций под требования проекта. Передадим характеристики и строительные длины для рабочей документации.</div></div>
 <div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">03</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Снабжению и комплектации</div><div style="font-size: 13.5px; line-height: 1.55; color: #5C6470">Одна отгрузка вместо десятка поставщиков. Специальные условия для постоянных партнёров.</div></div>
-<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">04</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Промышленным предприятиям</div><div style="font-size: 13.5px; line-height: 1.55; color: #5C6470">Серийные и нестандартные изделия для ремонтов, модернизации и обслуживания производств.</div></div>
+<div class="card"><div style="font-size: 15px; font-weight: 700; color: var(--accent)">04</div><div style="font-size: 17px; font-weight: 700; line-height: 1.3">Промышленным предприятиям</div><div style="font-size: 13.5px; line-height: 1.55; color: #5C6470">Арматура для ремонтов, модернизации и планового обслуживания трубопроводов.</div></div>
 </div>
 </div>
 
 <!-- ДОКУМЕНТЫ -->
 <div class="section">
-<div class="h2">Документы и качество</div>
+<h2 class="h2" style="margin: 0">Документы и качество</h2>
 <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px">
 <div class="card"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 26 26" fill="none"><path d="M13 23c5 0 9-2.5 9-9V6l-9-3-9 3v8c0 6.5 4 9 9 9Z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"></path><path d="m9 12.5 3 3 5-5.5" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"></path></svg></div><div style="font-size: 17px; font-weight: 700">Сертификаты соответствия</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Продукция выпускается по ГОСТ и ТУ. Комплект документов передаём вместе с отгрузкой.</div></div>
 <div class="card"><div style="width: 48px; height: 48px; border-radius: 12px; background: var(--accent-soft); display: flex; align-items: center; justify-content: center"><svg width="24" height="24" viewBox="0 0 26 26" fill="none"><path d="M15 3H7a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9l-6-6Z" stroke="var(--accent)" stroke-width="1.7" stroke-linejoin="round"></path><path d="M9 13h8M9 17h5" stroke="var(--accent)" stroke-width="1.7" stroke-linecap="round"></path></svg></div><div style="font-size: 17px; font-weight: 700">Паспорта изделий</div><div style="font-size: 14px; line-height: 1.55; color: #5C6470">Паспорт на каждую партию, протоколы испытаний — по запросу вместе со спецификацией.</div></div>
@@ -140,16 +253,20 @@ body { max-width: 1920px; margin-left: auto; margin-right: auto; }
 <!-- CTA -->
 <div style="padding: 88px 56px">
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 48px; background: #16181D; border-radius: 24px; padding: 48px 56px; color: #FFFFFF">
-<div style="display: flex; flex-direction: column; gap: 10px"><div style="font-size: 28px; font-weight: 800">Нужна продукция или нестандартное решение?</div><div style="font-size: 15px; color: #B9BDC4">Отправьте заявку или спецификацию — подготовим расчёт за 1 рабочий день.</div></div>
+<div style="display: flex; flex-direction: column; gap: 10px"><div style="font-size: 28px; font-weight: 800">Нужен расчёт по спецификации?</div><div style="font-size: 15px; color: #B9BDC4">Пришлите спецификацию — посчитаем цену и срок за 1 рабочий день.</div></div>
 <a href="index.html#zayavka" class="btn-primary" style="flex-shrink: 0">Связаться с менеджером</a>
 </div>
 </div>
 
 <div style="display: flex; align-items: center; justify-content: space-between; background: #16181D; color: #FFFFFF; padding: 28px 56px">
 <div style="font-size: 13px; color: #8A8F98">© 2026 ООО «ГИРЕКС». Все права защищены.</div>
-<div style="display: flex; gap: 24px"><a href="#" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="#" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
+<div style="display: flex; gap: 24px"><a href="privacy.html" style="color: #8A8F98; font-size: 13px">Политика конфиденциальности</a><a href="consent.html" style="color: #8A8F98; font-size: 13px">Согласие на обработку персональных данных</a></div>
 </div>
 
 <script src="cart.js"></script>
+<div class="mobile-bar">
+<a class="mb-call" href="tel:+79101360087"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M18 14.2v2.4a1.6 1.6 0 0 1-1.8 1.6A15.9 15.9 0 0 1 1.8 3.8 1.6 1.6 0 0 1 3.4 2h2.4a1.6 1.6 0 0 1 1.6 1.4c.1.8.3 1.5.6 2.2a1.6 1.6 0 0 1-.4 1.7l-1 1a12.8 12.8 0 0 0 4.8 4.8l1-1a1.6 1.6 0 0 1 1.7-.4c.7.3 1.4.5 2.2.6a1.6 1.6 0 0 1 1.4 1.6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Позвонить</a>
+<a class="mb-spec" href="index.html#zayavka">Запросить цену</a>
+</div>
 </body>
 </html>
