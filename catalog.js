@@ -283,6 +283,7 @@
     document.getElementById('cat-found').textContent = 'Найдено: ' + visible.length + ' ' + word;
     document.getElementById('cat-empty').style.display = visible.length ? 'none' : 'block';
     renderChips();
+    renderHeading();
     renderPager(pages);
     syncUrl();
     var ma = document.getElementById('mobile-apply');
@@ -338,6 +339,22 @@
     document.getElementById('reset-all-top').style.display = box.children.length ? 'inline' : 'none';
   }
 
+  /* при одном выбранном разделе заголовок страницы — название раздела */
+  var h1 = document.getElementById('cat-h1');
+  var baseH1 = h1 ? h1.textContent : '';
+  var baseTitle = document.title;
+  var sub = document.getElementById('cat-sub');
+  var baseSub = sub ? sub.textContent : '';
+  function renderHeading() {
+    var one = state.sel.group.length === 1 ? GROUP_LABELS[state.sel.group[0]] : '';
+    if (h1) h1.textContent = one || baseH1;
+    document.title = one ? one + ' — каталог GIREX' : baseTitle;
+    if (!sub) return;
+    if (!one) { sub.textContent = baseSub; return; }
+    var n = items.filter(function (i) { return i.group === state.sel.group[0]; }).length;
+    sub.textContent = n + ' ' + plural(n, 'позиция', 'позиции', 'позиций') + ' в разделе.';
+  }
+
   function renderPager(pages) {
     var pager = document.getElementById('cat-pager');
     pager.textContent = '';
@@ -378,6 +395,12 @@
       var raw = params.get(g.key);
       state.sel[g.key] = raw ? raw.split(',').map(function (v) { return g.numeric ? +v : v; }) : [];
     });
+    /* старые ссылки вида catalog.html#g-shar */
+    var legacy = /^#g-(\w+)$/.exec(location.hash);
+    if (legacy && !state.sel.group.length && GROUP_LABELS[legacy[1]]) {
+      state.sel.group = [legacy[1]];
+      history.replaceState(null, '', location.pathname + location.search);
+    }
     state.q = (params.get('q') || '').toLowerCase();
     state.sort = params.get('sort') || 'default';
     state.per = +(params.get('per') || 24);
