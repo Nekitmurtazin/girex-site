@@ -132,12 +132,20 @@
     var thumbs = document.getElementById('p-thumbs');
     var stage = document.getElementById('p-img');
     thumbs.textContent = '';
-    if (!P.img) { stage.style.display = 'none'; return; }
-    stage.src = P.img;
+    /* сначала фото товара, затем изображение из PDF-каталога */
+    var pics = (P.photos || []).concat(P.img ? [P.img] : []);
+    if (!pics.length) { stage.style.display = 'none'; return; }
+    stage.src = pics[0];
     stage.alt = P.name;
-    var t = el('button', { className: 'thumb active', type: 'button', title: 'Фото' });
-    t.appendChild(el('img', { src: P.img, alt: '' }));
-    thumbs.appendChild(t);
+    pics.forEach(function (src, i) {
+      var t = el('button', { className: 'thumb' + (i ? '' : ' active'), type: 'button', title: src === P.img ? 'Из каталога' : 'Фото' });
+      t.appendChild(el('img', { src: src, alt: '' }));
+      t.onclick = function () {
+        stage.src = src;
+        [].forEach.call(thumbs.querySelectorAll('.thumb'), function (b) { b.classList.toggle('active', b === t); });
+      };
+      thumbs.appendChild(t);
+    });
     if (P.dims) {
       var d = el('button', { className: 'thumb', type: 'button', title: 'Таблица размеров' });
       d.appendChild(el('span', null, 'Размеры'));
@@ -408,7 +416,8 @@
 
   function relCard(x) {
     var a = el('a', { className: 'rel-card', href: 'product.html?id=' + encodeURIComponent(x.id) });
-    if (x.img) a.appendChild(el('img', { src: x.img, alt: '', loading: 'lazy' }));
+    var src = (x.photos && x.photos[0]) || x.img;
+    if (src) a.appendChild(el('img', { src: src, alt: '', loading: 'lazy' }));
     a.appendChild(el('b', null, x.name.length > 70 ? x.name.slice(0, 70) + '…' : x.name));
     var xa = x.attr || {};
     a.appendChild(el('span', null, (x.models[0] || '') + (xa.dn && xa.dn.length ? ' · DN' + xa.dn[0] + ' – DN' + xa.dn[xa.dn.length - 1] : '')));
