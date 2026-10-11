@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /cart.html
 
-Sitemap: https://nekitmurtazin.github.io/girex-site/sitemap.xml
+Sitemap: https://girex.ru/sitemap.xml
