@@ -1,10 +1,14 @@
 <?php
 /*
- * Приём заявок с сайта GIREX: создаёт лид в Битрикс24 и дублирует заявку на почту.
- * Настройки (адрес вебхука, почта) — в lead-config.php рядом с этим файлом,
+ * Приём заявок с сайта GIREX: создаёт сделку (или лид) в Битрикс24 и дублирует заявку на почту.
+ * Настройки (адрес вебхука, почта, воронка) — в lead-config.php рядом с этим файлом,
  * образец — lead-config.example.php. Сам lead-config.php в Git и в архивы сайта не попадает.
  *
- * lead.php?check — проверка настройки без создания лида: версия PHP, конфиг, ответ Битрикс24.
+ * Режим «сделка»: клиент ищется среди контактов по телефону и почте, новый — создаётся вместе
+ * с компанией; сделка встаёт на первую стадию воронки, позиции корзины — во вкладку «Товары».
+ *
+ * lead.php?check — проверка настройки без создания заявки: версия PHP, конфиг, ответ Битрикс24
+ * и обязательные поля сделки, которые сайт не заполняет.
  */
 declare(strict_types=1);
 
@@ -117,6 +121,33 @@ function mailCopy(array $cfg, string $subject, string $text, string $replyTo): b
     return @mail($to, $subj, $text, implode("\r\n", $headers), '-f' . $from);
 }
 
+/* контакт клиента: сначала ищем по телефону, потом по почте */
+function findContact(string $webhook, string $phone, string $email): int
+{
+    foreach ([['PHONE', $phone], ['EMAIL', $email]] as [$type, $value]) {
+        if ($value === '') {
+            continue;
+        }
+        $r = bitrix($webhook, 'crm.duplicate.findbycomm', ['type' => $type, 'values' => [$value], 'entity_type' => 'CONTACT']);
+        $ids = $r['ok'] && is_array($r['result']) ? ($r['result']['CONTACT'] ?? []) : [];
+        if ($ids) {
+            return (int)$ids[0];
+        }
+    }
+    return 0;
+}
+
+/* компания по точному названию; нет такой — создаём */
+function findOrAddCompany(string $webhook, string $title, array $assigned): int
+{
+    $r = bitrix($webhook, 'crm.company.list', ['filter' => ['=TITLE' => $title], 'select' => ['ID']]);
+    if ($r['ok'] && !empty($r['result'][0]['ID'])) {
+        return (int)$r['result'][0]['ID'];
+    }
+    $r = bitrix($webhook, 'crm.company.add', ['fields' => ['TITLE' => $title, 'OPENED' => 'Y'] + $assigned]);
+    return $r['ok'] ? (int)$r['result'] : 0;
+}
+
 /* ——— настройки ——— */
 $cfgFile = __DIR__ . '/lead-config.php';
 $cfg = is_file($cfgFile) ? require $cfgFile : [];
@@ -127,19 +158,35 @@ $webhook = rtrim(trim((string)($cfg['webhook'] ?? '')), '/');
 if (!preg_match('#^https?://#', $webhook) || strpos($webhook, 'ВАШ-ПОРТАЛ') !== false) {
     $webhook = '';
 }
+$mode = ($cfg['mode'] ?? 'deal') === 'lead' ? 'lead' : 'deal';
+$assigned = !empty($cfg['assigned_by_id']) ? ['ASSIGNED_BY_ID' => (int)$cfg['assigned_by_id']] : [];
 
 /* ——— проверка настройки ——— */
 if (isset($_GET['check'])) {
     rateLimit(10);
-    $test = $webhook !== '' ? bitrix($webhook, 'crm.lead.fields', []) : ['ok' => false, 'why' => 'вебхук не задан'];
-    reply(200, [
+    $out = [
         'php' => PHP_VERSION,
         'curl' => function_exists('curl_init'),
         'mbstring' => function_exists('mb_substr'),
         'config' => is_file($cfgFile),
-        'bitrix' => $test['ok'] ? 'ok' : $test['why'],
+        'mode' => $mode === 'deal' ? 'сделки' : 'лиды',
         'email' => (string)($cfg['email'] ?? '') !== '',
-    ]);
+    ];
+    $test = $webhook !== '' ? bitrix($webhook, 'crm.' . $mode . '.fields', []) : ['ok' => false, 'why' => 'вебхук не задан'];
+    $out['bitrix'] = $test['ok'] ? 'ok' : $test['why'];
+    if ($test['ok'] && is_array($test['result'])) {
+        /* обязательные поля, которые сайт не заполняет: из-за них Битрикс24 откажет в создании */
+        $filled = ['TITLE', 'CATEGORY_ID', 'STAGE_ID', 'STATUS_ID', 'SOURCE_ID', 'SOURCE_DESCRIPTION', 'COMMENTS',
+                   'OPENED', 'ASSIGNED_BY_ID', 'CONTACT_ID', 'COMPANY_ID', 'NAME', 'PHONE', 'EMAIL', 'COMPANY_TITLE'];
+        $missing = [];
+        foreach ($test['result'] as $code => $f) {
+            if (!empty($f['isRequired']) && empty($f['isReadOnly']) && !in_array($code, $filled, true)) {
+                $missing[] = $code . ' (' . ($f['formLabel'] ?? $f['title'] ?? $code) . ')';
+            }
+        }
+        $out['required_missing'] = $missing;
+    }
+    reply(200, $out);
 }
 
 if (($_SERVER['REQUEST_METHOD'] ?? '') !== 'POST') {
@@ -200,7 +247,23 @@ foreach (['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term']
 }
 $ref = is_string($in['ref'] ?? null) ? cut($in['ref'], 500) : '';
 
-/* текст заявки: все поля, кроме вынесенных в отдельные поля лида */
+/* позиции корзины — строки товаров сделки */
+$rows = [];
+foreach (is_array($in['items'] ?? null) ? $in['items'] : [] as $it) {
+    if (count($rows) >= 50 || !is_array($it) || !is_string($it['name'] ?? null)) {
+        continue;
+    }
+    $extra = [];
+    foreach (['model', 'size'] as $key) {
+        if (is_string($it[$key] ?? null) && trim($it[$key]) !== '') {
+            $extra[] = trim($it[$key]);
+        }
+    }
+    $label = trim($it['name']) . ($extra ? ' (' . implode(', ', $extra) . ')' : '');
+    $rows[] = ['PRODUCT_NAME' => cut($label, 250), 'PRICE' => 0, 'QUANTITY' => max(1, (int)($it['qty'] ?? 1))];
+}
+
+/* текст заявки: все поля, кроме вынесенных в контакт */
 $lines = [];
 foreach ($fields as $k => $v) {
     if ($v === '' || in_array($k, ['Имя', 'Телефон', 'Почта', 'Компания'], true)) {
@@ -215,42 +278,88 @@ foreach ($utm as $u => $val) {
     $lines[] = $u . ': ' . $val;
 }
 $comments = implode("\n", $lines);
+$client = 'Имя: ' . $name . "\n" . 'Телефон: ' . $phone . "\n"
+    . ($email !== '' ? 'Почта: ' . $email . "\n" : '')
+    . ($company !== '' ? 'Компания: ' . $company . "\n" : '');
 
 $title = cut('Заявка с сайта GIREX — ' . $source, 250);
-$lead = [
-    'TITLE' => $title,
-    'NAME' => $name,
-    'COMPANY_TITLE' => $company,
-    'PHONE' => [['VALUE' => $phone, 'VALUE_TYPE' => 'WORK']],
-    'SOURCE_ID' => 'WEB',
-    'SOURCE_DESCRIPTION' => cut($source . ($page !== '' ? ' — ' . $page : ''), 250),
-    'COMMENTS' => $comments,
-    'OPENED' => 'Y',
-];
-if ($email !== '') {
-    $lead['EMAIL'] = [['VALUE' => $email, 'VALUE_TYPE' => 'WORK']];
-}
-if (!empty($cfg['assigned_by_id'])) {
-    $lead['ASSIGNED_BY_ID'] = (int)$cfg['assigned_by_id'];
-}
+$sourceDescription = cut($source . ($page !== '' ? ' — ' . $page : ''), 250);
+$utmFields = [];
 foreach ($utm as $u => $val) {
-    $lead[strtoupper($u)] = $val;
+    $utmFields[strtoupper($u)] = $val;
 }
 
-$bx = $webhook !== ''
-    ? bitrix($webhook, 'crm.lead.add', ['fields' => $lead, 'params' => ['REGISTER_SONET_EVENT' => 'Y']])
-    : ['ok' => false, 'why' => 'вебхук не задан'];
+if ($webhook === '') {
+    $bx = ['ok' => false, 'why' => 'вебхук не задан'];
+} elseif ($mode === 'lead') {
+    $lead = [
+        'TITLE' => $title,
+        'NAME' => $name,
+        'COMPANY_TITLE' => $company,
+        'PHONE' => [['VALUE' => $phone, 'VALUE_TYPE' => 'WORK']],
+        'SOURCE_ID' => 'WEB',
+        'SOURCE_DESCRIPTION' => $sourceDescription,
+        'COMMENTS' => $comments,
+        'OPENED' => 'Y',
+    ] + $utmFields + $assigned;
+    if ($email !== '') {
+        $lead['EMAIL'] = [['VALUE' => $email, 'VALUE_TYPE' => 'WORK']];
+    }
+    $bx = bitrix($webhook, 'crm.lead.add', ['fields' => $lead, 'params' => ['REGISTER_SONET_EVENT' => 'Y']]);
+    $bx['what'] = 'Лид в Битрикс24 создан';
+} else {
+    /* клиент: найденный контакт или новый вместе с компанией; если не вышло — сделка всё равно создаётся */
+    $contactId = findContact($webhook, $phone, $email);
+    $companyId = 0;
+    if ($contactId === 0) {
+        if ($company !== '') {
+            $companyId = findOrAddCompany($webhook, cut($company, 250), $assigned);
+        }
+        $contact = [
+            'NAME' => $name !== '' ? $name : 'Без имени',
+            'PHONE' => [['VALUE' => $phone, 'VALUE_TYPE' => 'WORK']],
+            'SOURCE_ID' => 'WEB',
+            'OPENED' => 'Y',
+        ] + $assigned;
+        if ($email !== '') {
+            $contact['EMAIL'] = [['VALUE' => $email, 'VALUE_TYPE' => 'WORK']];
+        }
+        if ($companyId) {
+            $contact['COMPANY_ID'] = $companyId;
+        }
+        $r = bitrix($webhook, 'crm.contact.add', ['fields' => $contact]);
+        $contactId = $r['ok'] ? (int)$r['result'] : 0;
+    }
+
+    $deal = [
+        'TITLE' => $title,
+        'CATEGORY_ID' => (int)($cfg['deal_category_id'] ?? 0),
+        'SOURCE_ID' => 'WEB',
+        'SOURCE_DESCRIPTION' => $sourceDescription,
+        'COMMENTS' => $client . ($comments !== '' ? "\n" . $comments : ''),
+        'OPENED' => 'Y',
+    ] + $utmFields + $assigned;
+    if (!empty($cfg['deal_stage_id'])) {
+        $deal['STAGE_ID'] = (string)$cfg['deal_stage_id'];
+    }
+    if ($contactId) {
+        $deal['CONTACT_ID'] = $contactId;
+    }
+    if ($companyId) {
+        $deal['COMPANY_ID'] = $companyId;
+    }
+    $bx = bitrix($webhook, 'crm.deal.add', ['fields' => $deal, 'params' => ['REGISTER_SONET_EVENT' => 'Y']]);
+    $bx['what'] = 'Сделка в Битрикс24 создана';
+    if ($bx['ok'] && $rows) {
+        bitrix($webhook, 'crm.deal.productrows.set', ['id' => (int)$bx['result'], 'rows' => $rows]);
+    }
+}
 
 /* копия на почту: всегда или только если Битрикс24 не принял заявку */
 $mailed = false;
 if (!empty($cfg['email_always']) || !$bx['ok']) {
-    $text = $title . "\n\n"
-        . 'Имя: ' . $name . "\n"
-        . 'Телефон: ' . $phone . "\n"
-        . ($email !== '' ? 'Почта: ' . $email . "\n" : '')
-        . ($company !== '' ? 'Компания: ' . $company . "\n" : '')
-        . "\n" . $comments . "\n\n"
-        . ($bx['ok'] ? 'Лид в Битрикс24 создан, № ' . $bx['result'] : 'В Битрикс24 заявка НЕ попала: ' . $bx['why']);
+    $text = $title . "\n\n" . $client . "\n" . $comments . "\n\n"
+        . ($bx['ok'] ? $bx['what'] . ', № ' . $bx['result'] : 'В Битрикс24 заявка НЕ попала: ' . $bx['why']);
     $mailed = mailCopy($cfg, $title, $text, $email);
 }
 

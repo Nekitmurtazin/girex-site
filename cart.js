@@ -118,7 +118,7 @@ function readSession(key) {
   try { return sessionStorage.getItem(key); } catch (e) { return null; }
 }
 
-function sendLead(fields) {
+function sendLead(fields, items) {
   var hp = document.querySelector('input[name="website"]');
   var utm = {};
   try { utm = JSON.parse(readSession('girex-utm') || '{}'); } catch (e) {}
@@ -126,7 +126,7 @@ function sendLead(fields) {
   return fetch('lead.php', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ fields: fields, utm: utm, ref: ref && ref !== '-' ? ref : '', hp: hp ? hp.value : '', t: Date.now() - pageStart })
+    body: JSON.stringify({ fields: fields, items: items || [], utm: utm, ref: ref && ref !== '-' ? ref : '', hp: hp ? hp.value : '', t: Date.now() - pageStart })
   }).then(function (r) { return r.json(); }).then(function (res) {
     if (!res.ok) throw new Error(res.error || 'send failed');
     return res;
@@ -145,9 +145,10 @@ function sendFormSubmit(fields) {
   });
 }
 
-window.sendRequest = function (fields, mailtoBody) {
+/* items — позиции корзины [{ name, model, size, qty }], уходят строками товаров в сделку */
+window.sendRequest = function (fields, mailtoBody, items) {
   var send = /\.github\.io$/.test(location.hostname) ? sendFormSubmit : sendLead;
-  return send(fields).catch(function (err) {
+  return send(fields, items).catch(function (err) {
     // не дошло — открываем почтовую программу с готовым письмом
     location.href = 'mailto:' + window.GIREX_EMAIL + '?subject=' + encodeURIComponent('Заявка с сайта GIREX')
       + '&body=' + encodeURIComponent(mailtoBody);

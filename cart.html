@@ -349,7 +349,9 @@ document.getElementById('order').addEventListener('submit', function (e) {
     'Всего позиций': String(items.length),
     'Источник заявки': new URLSearchParams(location.search).get('from') ? 'карточка исполнения ' + new URLSearchParams(location.search).get('from') : 'корзина',
     'Страница': location.href
-  }, body).then(function () {
+  }, body, items.map(function (it) {
+    return { name: it.name, model: it.model || '', size: it.size || '', qty: it.qty };
+  })).then(function () {
     Cart.clear();
     e.target.reset();
     cartToast('Заявка отправлена — менеджер свяжется с вами в течение рабочего дня');
