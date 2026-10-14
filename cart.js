@@ -91,20 +91,63 @@
   });
 
 
-/* ——— отправка заявки на почту через FormSubmit (без своего сервера) ——— */
-window.GIREX_EMAIL = 'info@girex.ru';
+/* ——— рекламные метки и сайт, с которого пришёл посетитель: запоминаем на первой странице визита ——— */
+(function () {
+  try {
+    var q = new URLSearchParams(location.search);
+    var utm = {};
+    ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+      if (q.get(k)) utm[k] = q.get(k);
+    });
+    if (Object.keys(utm).length) sessionStorage.setItem('girex-utm', JSON.stringify(utm));
+    if (!sessionStorage.getItem('girex-ref')) {
+      var ref = document.referrer;
+      sessionStorage.setItem('girex-ref', ref && ref.indexOf(location.host) < 0 ? ref : '-');
+    }
+  } catch (e) {}
+})();
 
-window.sendRequest = function (fields, mailtoBody) {
-  var url = 'https://formsubmit.co/ajax/' + window.GIREX_EMAIL;
+/* ——— отправка заявки ———
+   На хостинге — в lead.php: он создаёт лид в Битрикс24 и дублирует заявку на почту.
+   На GitHub Pages PHP нет, там заявка уходит через FormSubmit.
+   Если отправить не получилось — открываем почтовую программу с готовым письмом. */
+window.GIREX_EMAIL = 'info@girex.ru';
+var pageStart = Date.now();
+
+function readSession(key) {
+  try { return sessionStorage.getItem(key); } catch (e) { return null; }
+}
+
+function sendLead(fields) {
+  var hp = document.querySelector('input[name="website"]');
+  var utm = {};
+  try { utm = JSON.parse(readSession('girex-utm') || '{}'); } catch (e) {}
+  var ref = readSession('girex-ref');
+  return fetch('lead.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+    body: JSON.stringify({ fields: fields, utm: utm, ref: ref && ref !== '-' ? ref : '', hp: hp ? hp.value : '', t: Date.now() - pageStart })
+  }).then(function (r) { return r.json(); }).then(function (res) {
+    if (!res.ok) throw new Error(res.error || 'send failed');
+    return res;
+  });
+}
+
+function sendFormSubmit(fields) {
   var payload = Object.assign({ _subject: 'Заявка с сайта GIREX', _template: 'table', _captcha: 'false' }, fields);
-  return fetch(url, {
+  return fetch('https://formsubmit.co/ajax/' + window.GIREX_EMAIL, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
     body: JSON.stringify(payload)
   }).then(function (r) { return r.json(); }).then(function (res) {
     if (String(res.success) !== 'true') throw new Error(res.message || 'send failed');
     return res;
-  }).catch(function (err) {
+  });
+}
+
+window.sendRequest = function (fields, mailtoBody) {
+  var send = /\.github\.io$/.test(location.hostname) ? sendFormSubmit : sendLead;
+  return send(fields).catch(function (err) {
     // не дошло — открываем почтовую программу с готовым письмом
     location.href = 'mailto:' + window.GIREX_EMAIL + '?subject=' + encodeURIComponent('Заявка с сайта GIREX')
       + '&body=' + encodeURIComponent(mailtoBody);

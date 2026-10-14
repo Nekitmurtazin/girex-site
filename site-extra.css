@@ -66,3 +66,6 @@
 .cert span { font-size: 12.5px; color: #8A8F98; }
 @media (max-width: 1100px) { .reviews { grid-template-columns: 1fr; } .certs { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .certs { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
+/* Ловушка для ботов в формах заявки: человек это поле не видит и не заполняет */
+.hp-field { position: absolute !important; left: -10000px !important; width: 1px !important; height: 1px !important; opacity: 0 !important; pointer-events: none; }
