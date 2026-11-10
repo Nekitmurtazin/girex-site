@@ -14,12 +14,12 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 E = lambda s: html.escape(str(s), quote=True)
 
-GROUP_LABELS = {"shar": "Шаровые краны", "zadv": "Задвижки и клапаны фланцевые",
+GROUP_LABELS = {"shar": "Шаровые клапаны", "zadv": "Задвижки и клапаны фланцевые",
                 "rezb": "Задвижки и клапаны резьбовые", "kov": "Кованая арматура",
                 "filtr": "Фильтры", "flanec": "Фланцы", "fiting": "Фитинги"}
 
-# скрытые синонимы для поиска по каталогу: посетители ищут и по старым терминам
-SEARCH_SYNONYMS = {"shar": "шаровой клапан шаровые клапаны"}
+# скрытые синонимы для поиска по каталогу (слова, которых нет в названиях), по разделам
+SEARCH_SYNONYMS = {}
 
 CART_ICON = ('<svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M3 4h2.2l2.3 11.2a1.6 1.6 0 0 0 1.6 1.3h8.2a1.6 1.6 0 0 0 1.6-1.2L21 8H6.2" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>'
              '<circle cx="10" cy="20" r="1.3" fill="currentColor"/><circle cx="17.5" cy="20" r="1.3" fill="currentColor"/></svg>')
