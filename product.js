@@ -275,7 +275,6 @@
     if (a.drive) rows.push(['Управление', a.drive, false, '']);
     if (P.temp) rows.push(['Рабочая температура', P.temp, false, 'temp']);
     if (a.media && a.media.length) rows.push(['Рабочая среда', a.media.join(', '), false, 'media']);
-    if (P.standards && P.standards.length) rows.push(['Стандарты', P.standards.slice(0, 4).join(', '), false, '']);
     if (s) rows.push(['Наличие', s.st === 'in' ? 'на складе, ' + s.q + ' шт.' : (s.st === 'order' ? 'под заказ, ' + s.lead + ' дней' : 'снят с производства'), true, 'stock']);
     else rows.push(['Наличие и срок', 'зависят от исполнения', false, '']);
     rows.forEach(function (r) {
@@ -317,6 +316,7 @@
     var d = document.getElementById('tab-opisanie');
     d.textContent = '';
     if (P.features && P.features.length) {
+      d.appendChild(el('div', { className: 'pick-title' }, 'Особенности'));
       var ul = el('ul', { className: 'feat' });
       P.features.forEach(function (f) { ul.appendChild(el('li', null, f)); });
       d.appendChild(ul);
@@ -358,29 +358,12 @@
     var h = document.getElementById('tab-harakteristiki');
     h.textContent = '';
     if (P.materials && P.materials.length) {
-      h.appendChild(el('div', { className: 'pick-title' }, 'Комплектующие и материалы'));
-      h.appendChild(table(['Деталь', 'Материал'], P.materials));
+      h.appendChild(el('div', { className: 'pick-title' }, 'Перечень материалов'));
+      h.appendChild(table(['№', 'Деталь', 'Материал'], P.materials.map(function (m, i) { return [String(i + 1)].concat(m); })));
+      var legend = materialLegend(P.materials);
+      if (legend) h.appendChild(el('div', { className: 'pick-note mat-legend' }, legend));
     }
-    if (P.dims && P.dims.rows && P.dims.rows.length) {
-      var t2 = el('div', { className: 'pick-title' }, 'Присоединительные и габаритные размеры, мм');
-      t2.style.marginTop = '22px';
-      h.appendChild(t2);
-      var rows = P.dims.rows;
-      if (sel.dn) {
-        var num = sel.dn.replace('DN', '');
-        var head = (P.dims.head || []).map(function (x) { return (x || '').toLowerCase(); });
-        var col = head.indexOf('dn');
-        if (col < 0) col = head.findIndex(function (x) { return x.indexOf('dn') >= 0 || x.indexOf('диаметр') >= 0; });
-        var only = rows.filter(function (r) { return col >= 0 ? String(r[col]).trim() === num : r.indexOf(num) >= 0; });
-        if (only.length) {
-          rows = only;
-          var hint = el('div', { className: 'pick-note' }, 'Показана строка исполнения ' + sel.dn + '. Сбросьте параметры, чтобы увидеть всю таблицу.');
-          hint.style.margin = '6px 0 10px';
-          h.appendChild(hint);
-        }
-      }
-      h.appendChild(table(P.dims.head, rows));
-    }
+    dimsTables(h);
     if (SKUS.length) {
       var t3 = el('div', { className: 'pick-title' }, 'Исполнения серии');
       t3.style.marginTop = '22px';
@@ -412,6 +395,62 @@
       });
       doc.appendChild(wrap);
     }
+  }
+
+  /* ——— габаритные размеры: одна таблица или по таблице на каждое давление ——— */
+  function dimsTables(h) {
+    var tables = (Array.isArray(P.dims) ? P.dims : [P.dims]).filter(function (t) { return t && t.rows && t.rows.length; });
+    if (!tables.length) return;
+    var shown = tables;
+    if (sel.press && tables.length > 1) {
+      var match = tables.filter(function (t) { return ((t.pn || t.title || '').match(/PN\d+/g) || []).indexOf(sel.press) >= 0; });
+      if (match.length) shown = match;
+    }
+    var dnNote = false;
+    shown.forEach(function (t) {
+      var title = el('div', { className: 'pick-title' }, (t.title || 'Присоединительные и габаритные размеры') + ', мм');
+      title.style.marginTop = '22px';
+      h.appendChild(title);
+      var rows = t.rows;
+      if (sel.dn) {
+        var num = sel.dn.replace('DN', '');
+        var head = (t.head || []).map(function (x) { return (x || '').toLowerCase(); });
+        var col = head.indexOf('dn');
+        if (col < 0) col = head.findIndex(function (x) { return x.indexOf('dn') >= 0 || x.indexOf('диаметр') >= 0; });
+        var only = rows.filter(function (r) { return col >= 0 ? String(r[col]).trim() === num : r.indexOf(num) >= 0; });
+        if (only.length) { rows = only; dnNote = true; }
+      }
+      h.appendChild(table(t.head, rows));
+    });
+    var notes = [];
+    if (shown.length < tables.length) notes.push('Показана таблица для ' + sel.press + '.');
+    if (dnNote) notes.push('Показана строка исполнения ' + sel.dn + '.');
+    if (notes.length) {
+      var hint = el('div', { className: 'pick-note' }, notes.join(' ') + ' Сбросьте параметры, чтобы увидеть все размеры.');
+      hint.style.margin = '8px 0 0';
+      h.appendChild(hint);
+    }
+  }
+
+  /* расшифровка международных обозначений материалов, встречающихся в таблице */
+  var MATERIALS = {
+    'PTFE': 'политетрафторэтилен (ПТФЭ)',
+    'RPTFE': 'усиленный политетрафторэтилен',
+    'PEEK': 'полиэфирэфиркетон (ПЭЭК)',
+    'WCB': 'литая углеродистая сталь ASTM A216 WCB',
+    '304': 'нержавеющая сталь AISI 304',
+    '316': 'нержавеющая сталь AISI 316',
+    '201': 'нержавеющая сталь AISI 201',
+    'VITON': 'фторкаучук (FKM)'
+  };
+  function materialLegend(rows) {
+    var found = [];
+    rows.forEach(function (r) {
+      String(r[r.length - 1]).split(/[\s\/,;()]+/).forEach(function (code) {
+        if (MATERIALS[code] && found.indexOf(code) < 0) found.push(code);
+      });
+    });
+    return found.length ? 'Обозначения: ' + found.map(function (c) { return c + ' — ' + MATERIALS[c]; }).join('; ') + '.' : '';
   }
 
   function relCard(x) {
